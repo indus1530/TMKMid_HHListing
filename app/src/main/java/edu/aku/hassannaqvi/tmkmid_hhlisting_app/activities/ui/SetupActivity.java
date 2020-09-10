@@ -165,7 +165,7 @@ public class SetupActivity extends Activity {
         Log.d(TAG, "SaveDraft: " + lc.getHh03());
     }
 
-    public void setGPS() {
+    private void setGPS() {
         SharedPreferences GPSPref = getSharedPreferences("GPSCoordinates", Context.MODE_PRIVATE);
 //        String date = DateFormat.format("dd-MM-yyyy HH:mm", Long.parseLong(GPSPref.getString("Time", "0"))).toString();
         try {

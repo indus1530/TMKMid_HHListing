@@ -166,7 +166,7 @@
                             style="@style/EditTextNum"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:hint="@string/num"
+                            android:hint="@string/hh16"
                             android:maxLength="2"
                             android:onTextChanged="@{callback.onTextChangedHH14}"
                             app:maxValue="99"
@@ -248,29 +248,8 @@
                             style="@style/i_textview"
                             android:text="@string/hh12" />
 
-                        <RadioGroup
-                            android:id="@+id/hh12"
-                            style="@style/hradiogroup"
-                            android:visibility="gone">
-
-                            <RadioButton
-                                android:id="@+id/hh12a"
-                                style="@style/radiobutton"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:text="@string/yes" />
-
-                            <RadioButton
-                                android:id="@+id/hh12b"
-                                style="@style/radiobutton"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:text="@string/no" />
-
-                        </RadioGroup>
-
                         <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/hh13"
+                            android:id="@+id/hh12"
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
@@ -311,7 +290,7 @@
 
                     <LinearLayout style="@style/linearlayout_view_wt_bound">
 
-                        <Switch
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/hhIsNewFam"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
