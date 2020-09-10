@@ -6,6 +6,7 @@
         android:left="2px"
         android:right="2px"
         android:top="2px" />
+    <corners android:radius="10px" />
     <stroke
         android:width="3px"
         android:color="@color/black_overlay" />

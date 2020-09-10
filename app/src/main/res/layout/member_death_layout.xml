@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -17,66 +16,55 @@
     </data>
 
 
-    <ScrollView
-        style="@style/i_scrollview"
-        android:fadeScrollbars="false"
-        android:fillViewport="true"
-        android:layoutDirection="rtl"
-        android:scrollbarSize="10dip"
-        android:textDirection="rtl"
-        tools:context=".activities.ui.FamilyListingActivity">
+    <LinearLayout
+        android:id="@+id/fldGrpSecMDL"
+        style="@style/vlinearlayout"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_border">
 
-        <LinearLayout
-            android:id="@+id/fldGrpSecMDL"
-            style="@style/vlinearlayout">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hh19cv"
+            style="@style/cardView">
 
+            <LinearLayout style="@style/vlinearlayout">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/hh19cv"
-                style="@style/cardView">
+                <TextView
+                    style="@style/i_textview"
+                    android:text="@string/hh19" />
 
-                <LinearLayout style="@style/vlinearlayout">
+                <com.edittextpicker.aliazaz.EditTextPicker
+                    android:id="@+id/hh19"
+                    style="@style/EditTextAlpha"
+                    android:hint="@string/hh19"
+                    android:maxLength="9" />
 
-                    <TextView
-                        style="@style/i_textview"
-                        android:text="@string/hh19" />
+            </LinearLayout>
 
-                    <com.edittextpicker.aliazaz.EditTextPicker
-                        android:id="@+id/hh19"
-                        style="@style/EditTextAlpha"
-                        android:hint="@string/hh19"
-                        android:maxLength="9" />
+        </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hh20cv"
+            style="@style/cardView">
 
-            </androidx.cardview.widget.CardView>
+            <LinearLayout style="@style/vlinearlayout">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/hh20cv"
-                style="@style/cardView">
+                <TextView
+                    style="@style/i_textview"
+                    android:text="@string/hh20" />
 
-                <LinearLayout style="@style/vlinearlayout">
+                <com.edittextpicker.aliazaz.EditTextPicker
+                    android:id="@+id/hh20"
+                    style="@style/EditTextNum"
+                    android:hint="@string/hh20"
+                    android:maxLength="2"
+                    app:maxValue="99"
+                    app:minValue="1"
+                    app:type="range" />
 
-                    <TextView
-                        style="@style/i_textview"
-                        android:text="@string/hh20" />
+            </LinearLayout>
 
-                    <com.edittextpicker.aliazaz.EditTextPicker
-                        android:id="@+id/hh20"
-                        style="@style/EditTextNum"
-                        android:hint="@string/hh20"
-                        android:maxLength="2"
-                        app:maxValue="99"
-                        app:minValue="1"
-                        app:type="range" />
+        </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
 </layout>
