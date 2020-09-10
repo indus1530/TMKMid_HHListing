@@ -24,8 +24,10 @@
     <string name="hh12"> کیا اس گھر میں 12 سے 23 مہینے کی عمر کے بچے ہیں؟ </string>
     <string name="hh15"> ذات ؟ </string>
     <string name="hh16"> افراد کی تعداد </string>
-    <string name="hh17">جيڪڏھن ھا تھ پنجن سالن کان گھٽ عمر جا ڪل ڪيترا ٻار آھن؟</string>
-    <string name="hh18">گھراڻي ۾ 10 کان 19 سالن جي عمر جي مردن /  ڇوڪرن جو تعداد؟</string>
+    <string name="hh17">ڇا گذريل پنجن سالن دوران ھن گھر جي ڪنھن ڀاتي (فرد) فرد جي وفات ٿي؟</string>
+    <string name="hh13">گھراڻي ۾ 10 کان 19 سالن جي عمر جي مردن /  ڇوڪرن جو تعداد؟</string>
+    <string name="hh18">جيڪڏھن ھا تھ ڪيترن ڀاتين (فردن) جي وفات ٿي؟</string>
+    <string name="hh19">وفات ڪندڙ فرد جي جنس؟</string>
     <string name="hhIsNewFam"> کیا اس گھر میں مذید کوئی خاندان رہائش پزیر ہے </string>
     <string name="hh14"> کیا یہ جگہ رہائشی مقاصد کے لئے استعمال کی جا رہی ہے؟ </string>
     <string name="na101a"> ضلعہ </string>
