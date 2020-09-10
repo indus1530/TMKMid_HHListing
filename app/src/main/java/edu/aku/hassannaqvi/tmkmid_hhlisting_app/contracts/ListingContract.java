@@ -22,11 +22,9 @@ public class ListingContract {
     private String hh02;
     private String hh03;
     private String hh04;
-    private String hh04other;
     private String hh05;
     private String hh06;
     private String hh07;
-    private String hh07n;
     private String hh08a1;
     private String hh08;
     private String hh09;
@@ -38,7 +36,9 @@ public class ListingContract {
     private String hh14;
     private String hh15;
     private String hh16;
-    private String hhadd;
+    private String hh17;
+    private String hh18;
+    private String hh19;
     private String isNewHH;
     private String counter;
     private String DeviceID;
@@ -63,12 +63,12 @@ public class ListingContract {
         this.ID = ID;
     }
 
-    public String getHh04other() {
-        return hh04other;
+    public String getHh19() {
+        return hh19;
     }
 
-    public void setHh04other(String hh04other) {
-        this.hh04other = hh04other;
+    public void setHh19(String hh19) {
+        this.hh19 = hh19;
     }
 
     public String getTotalhh() {
@@ -228,12 +228,12 @@ public class ListingContract {
         this.hh07 = hh07;
     }
 
-    public String getHh07n() {
-        return hh07n;
+    public String getHh18() {
+        return hh18;
     }
 
-    public void setHh07n(String hh07n) {
-        this.hh07n = hh07n;
+    public void setHh18(String hh18) {
+        this.hh18 = hh18;
     }
 
     public String getHh08() {
@@ -300,12 +300,12 @@ public class ListingContract {
         this.UID = UID;
     }
 
-    public String getHhadd() {
-        return hhadd;
+    public String getHh17() {
+        return hh17;
     }
 
-    public void setHhadd(String hhadd) {
-        this.hhadd = hhadd;
+    public void setHh17(String hh17) {
+        this.hh17 = hh17;
     }
 
     public String getDeviceID() {
@@ -434,11 +434,11 @@ public class ListingContract {
         json.put(ListingEntry.COLUMN_NAME_HH02, this.hh02);
         json.put(ListingEntry.COLUMN_NAME_HH03, this.hh03);
         json.put(ListingEntry.COLUMN_NAME_HH04, this.hh04);
-        json.put(ListingEntry.COLUMN_NAME_HH04OTHER, this.hh04other);
+        json.put(ListingEntry.COLUMN_NAME_HH19, this.hh19);
         json.put(ListingEntry.COLUMN_NAME_HH05, this.hh05);
         json.put(ListingEntry.COLUMN_NAME_HH06, this.hh06);
         json.put(ListingEntry.COLUMN_NAME_HH07, this.hh07);
-        json.put(ListingEntry.COLUMN_NAME_HH07n, this.hh07n);
+        json.put(ListingEntry.COLUMN_NAME_HH18, this.hh18);
         json.put(ListingEntry.COLUMN_NAME_HH08, this.hh08);
         json.put(ListingEntry.COLUMN_NAME_HH09, this.hh09);
         json.put(ListingEntry.COLUMN_NAME_HH09A1, this.hh09a1);
@@ -450,7 +450,7 @@ public class ListingContract {
         json.put(ListingEntry.COLUMN_NAME_HH14, this.hh14);
         json.put(ListingEntry.COLUMN_NAME_HH15, this.hh15);
         json.put(ListingEntry.COLUMN_NAME_HH16, this.hh16);
-        json.put(ListingEntry.COLUMN_ADDRESS, this.hhadd);
+        json.put(ListingEntry.COLUMN_NAME_HH17, this.hh17);
         json.put(ListingEntry.COLUMN_NAME_DEVICEID, this.DeviceID);
         json.put(ListingEntry.COLUMN_NAME_GPSLat, this.GPSLat);
         json.put(ListingEntry.COLUMN_NAME_GPSLng, this.GPSLng);
@@ -481,11 +481,9 @@ public class ListingContract {
         lc.setHh02(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH02))));
         lc.setHh03(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH03))));
         lc.setHh04(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH04))));
-        lc.setHh04other(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH04OTHER))));
         lc.setHh05(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH05))));
         lc.setHh06(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH06))));
         lc.setHh07(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH07))));
-        lc.setHh07n(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH07n))));
         lc.setHh08(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH08))));
         lc.setHh09(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH09))));
         lc.setHh09a1(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH09A1))));
@@ -497,7 +495,9 @@ public class ListingContract {
         lc.setHh14(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH14))));
         lc.setHh15(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH15))));
         lc.setHh16(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH16))));
-        lc.setHhadd(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_ADDRESS))));
+        lc.setHh17(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH17))));
+        lc.setHh18(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH18))));
+        lc.setHh19(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH19))));
         lc.setDeviceID(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_DEVICEID))));
         lc.setGPSLat(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLat))));
         lc.setGPSLng(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLng))));
@@ -533,11 +533,11 @@ public class ListingContract {
         this.hh02 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH02);
         this.hh03 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH03);
         this.hh04 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH04);
-        this.hh04other = jsonObject.getString(ListingEntry.COLUMN_NAME_HH04OTHER);
+        this.hh19 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH19);
         this.hh05 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH05);
         this.hh06 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH06);
         this.hh07 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH07);
-        this.hh07n = jsonObject.getString(ListingEntry.COLUMN_NAME_HH07n);
+        this.hh18 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH18);
         this.hh08a1 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH08A1);
         this.hh08 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH08);
         this.hh09 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH09);
@@ -549,7 +549,7 @@ public class ListingContract {
         this.hh14 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH14);
         this.hh15 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH15);
         this.hh16 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH16);
-        this.hhadd = jsonObject.getString(ListingEntry.COLUMN_ADDRESS);
+        this.hh17 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH17);
         this.isNewHH = jsonObject.getString(ListingEntry.COLUMN_ISNEWHH);
         this.DeviceID = jsonObject.getString(ListingEntry.COLUMN_NAME_DEVICEID);
         this.GPSLat = jsonObject.getString(ListingEntry.COLUMN_NAME_GPSLat);
@@ -582,11 +582,9 @@ public class ListingContract {
         public static final String COLUMN_NAME_HH02 = "hh02";
         public static final String COLUMN_NAME_HH03 = "hh03";
         public static final String COLUMN_NAME_HH04 = "hh04";
-        public static final String COLUMN_NAME_HH04OTHER = "hh04other";
         public static final String COLUMN_NAME_HH05 = "hh05";
         public static final String COLUMN_NAME_HH06 = "hh06";
         public static final String COLUMN_NAME_HH07 = "hh07";
-        public static final String COLUMN_NAME_HH07n = "hh07n";
         public static final String COLUMN_NAME_HH08 = "hh08";
         public static final String COLUMN_NAME_HH09 = "hh09";
         public static final String COLUMN_NAME_HH08A1 = "hh08a1";
@@ -598,7 +596,9 @@ public class ListingContract {
         public static final String COLUMN_NAME_HH14 = "hh14";
         public static final String COLUMN_NAME_HH15 = "hh15";
         public static final String COLUMN_NAME_HH16 = "hh16";
-        public static final String COLUMN_ADDRESS = "hhadd";
+        public static final String COLUMN_NAME_HH17 = "hh17";
+        public static final String COLUMN_NAME_HH18 = "hh18";
+        public static final String COLUMN_NAME_HH19 = "hh19";
         public static final String COLUMN_ISNEWHH = "isnewhh";
         public static final String COLUMN_COUNTER = "counter";
         public static final String COLUMN_NAME_DEVICEID = "deviceid";

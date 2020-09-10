@@ -24,7 +24,7 @@ import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.lc;
 
 public class FamilyListingActivity extends AppCompatActivity {
 
-    public static String TAG = "FamilyListingActivity";
+    public static String TAG = FamilyListingActivity.class.getName();
     static Boolean familyFlag = false;
     ActivityFamilyListingBinding bi;
 
@@ -38,7 +38,7 @@ public class FamilyListingActivity extends AppCompatActivity {
 
         setupButtons();
 
-        bi.hh17.setOnCheckedChangeListener((compoundButton, b) -> {
+        bi.hhIsNewFam.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 bi.btnAddNewHousehold.setVisibility(View.VISIBLE);
                 bi.btnAddHousehold.setVisibility(View.GONE);
@@ -72,37 +72,36 @@ public class FamilyListingActivity extends AppCompatActivity {
         bi.hh13.setMaxvalue(Float.parseFloat(bi.hh11.getText().toString()));
     }
 
-    public void onTextChangedHH16(CharSequence s, int start, int before, int count) {
-        if (Objects.requireNonNull(bi.hh16.getText()).toString().trim().isEmpty()) return;
-        bi.hh11.setMaxvalue(Float.parseFloat(bi.hh16.getText().toString()) - 1);
+    public void onTextChangedHH14(CharSequence s, int start, int before, int count) {
+        if (Objects.requireNonNull(bi.hh14.getText()).toString().trim().isEmpty()) return;
+        bi.hh11.setMaxvalue(Float.parseFloat(bi.hh14.getText().toString()) - 1);
     }
 
     public void setupButtons() {
         if (MainApp.fCount < MainApp.fTotal) {
             bi.btnAddFamily.setVisibility(View.VISIBLE);
             bi.btnAddHousehold.setVisibility(View.GONE);
-            bi.hh17.setVisibility(View.GONE);
+            bi.hhIsNewFam.setVisibility(View.GONE);
         } else {
             bi.btnAddFamily.setVisibility(View.GONE);
             bi.btnAddHousehold.setVisibility(View.VISIBLE);
-            bi.hh17.setVisibility(View.VISIBLE);
+            bi.hhIsNewFam.setVisibility(View.VISIBLE);
             bi.deleteHH.setVisibility(View.VISIBLE);
         }
     }
 
     private void saveDraft() {
-
         lc.setHh07(MainApp.hh07txt);
-//        MainApp.lc.setHh08a1("1");
-        lc.setHh08(bi.hh08.getText().toString());
-        lc.setHh09(bi.hh09.getText().toString());
+        lc.setHh15(bi.deleteHH.isChecked() ? "1" : "0"); //Delete Family
+        lc.setIsNewHH(bi.hhIsNewFam.isChecked() ? "1" : "2"); //New Family Add
+        lc.setHh08(bi.hh08.getText().toString()); //HH Name
+        lc.setHh09(bi.hh09.getText().toString()); //Father Name
+        lc.setHh16(); //Cast
+        lc.setHh14(bi.hh14.getText().toString()); //Total Members
         lc.setHh10(bi.hh10a.isChecked() ? "1" : bi.hh10b.isChecked() ? "2" : "0");
         lc.setHh11(bi.hh11.getText().toString().isEmpty() ? "0" : bi.hh11.getText().toString());
         lc.setHh12(bi.hh12a.isChecked() ? "1" : bi.hh12b.isChecked() ? "2" : "0");
         lc.setHh13(bi.hh13.getText().toString().isEmpty() ? "0" : bi.hh13.getText().toString());
-        lc.setHh14(bi.hh16.getText().toString());
-        lc.setHh15(bi.deleteHH.isChecked() ? "1" : "0");
-        lc.setIsNewHH(bi.hh17.isChecked() ? "1" : "2");
 
         Log.d(TAG, "SaveDraft: Structure " + lc.getHh03());
 

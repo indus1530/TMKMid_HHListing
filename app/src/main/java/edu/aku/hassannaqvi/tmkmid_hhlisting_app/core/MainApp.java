@@ -29,9 +29,9 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.TypefaceUtil;
 public class MainApp extends Application {
 
     // GPS Related Field Variables
-//    public static final String _IP = "http://f38158";// .TEST server
-    public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
-    public static final String _HOST_URL = MainApp._IP + "/tpvics/api/";
+    public static final String _IP = "http://f38158";// .TEST server
+    //    public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
+    public static final String _HOST_URL = MainApp._IP + "/tmk/api/";
     private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
     private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
     private static final int TWO_MINUTES = 1000 * 60 * 2;
@@ -51,12 +51,12 @@ public class MainApp extends Application {
     public static int fCount = 0;
     public static int fTotal = 0;
     public static int cCount = 0;
+    public static int cTotal = 0;
 
     public static String enumCode = "";
     public static String clusterCode = "";
     public static String enumStr = "";
 
-    public static int cTotal = 0;
     public static SharedPreferences sharedPref;
     public static String userEmail = "0000";
     public static int versionCode;

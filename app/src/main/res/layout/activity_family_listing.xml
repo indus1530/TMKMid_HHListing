@@ -94,13 +94,11 @@
 
                 </androidx.cardview.widget.CardView>
 
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh09cv"
-                    style="@style/cardView"
-                    android:visibility="gone">
+                    style="@style/cardView">
 
-                    <LinearLayout style="@style/vlinearlayout">
+                    <LinearLayout style="@style/hlinearlayout">
 
                         <TextView
                             style="@style/i_textview"
@@ -122,9 +120,8 @@
 
                 </androidx.cardview.widget.CardView>
 
-
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/hh16cv"
+                    android:id="@+id/hh14cv"
                     style="@style/cardView">
 
                     <LinearLayout style="@style/hlinearlayout">
@@ -139,13 +136,13 @@
 
 
                         <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/hh16"
+                            android:id="@+id/hh14"
                             style="@style/EditTextNum"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:hint="@string/num"
                             android:maxLength="2"
-                            android:onTextChanged="@{callback.onTextChangedHH16}"
+                            android:onTextChanged="@{callback.onTextChangedHH14}"
                             app:maxValue="99"
                             app:minValue="1"
                             app:type="range" />
@@ -153,7 +150,6 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
-
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh10cv"
@@ -201,7 +197,6 @@
 
                 </androidx.cardview.widget.CardView>
 
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh12cv"
                     style="@style/cardView"
@@ -248,21 +243,20 @@
 
                 </androidx.cardview.widget.CardView>
 
-
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/hh17cv"
+                    android:id="@+id/hhIsNewFamcv"
                     style="@style/cardView">
 
                     <LinearLayout style="@style/linearlayout_view_wt_bound">
 
                         <Switch
-                            android:id="@+id/hh17"
+                            android:id="@+id/hhIsNewFam"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="@dimen/_8sdp"
                             android:tag="-1"
-                            android:text="@string/hh17"
+                            android:text="@string/hhIsNewFam"
                             android:textColor="@color/colorPrimaryDark"
                             android:textOff="@string/no"
                             android:textOn="@string/yes"

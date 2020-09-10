@@ -65,6 +65,7 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
     SharedPreferences sharedPrefDownload;
     SharedPreferences.Editor editorDownload;
     ActivityMainBinding bi;
+    private String clusterName;
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -97,7 +98,6 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             }
         }
     };
-    private String clusterName;
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
