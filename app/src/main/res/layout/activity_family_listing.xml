@@ -227,9 +227,8 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            android:onTextChanged="@{callback.onTextChangedHH11}"
                             android:text='@{hh10a.checked ? hh11.getText().toString() : ""}'
-                            app:maxValue="0"
+                            app:maxValue="20"
                             app:minValue="1"
                             app:type="range" />
 
@@ -333,59 +332,28 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            app:maxValue="25"
+                            android:onTextChanged="@{callback.onTextChangedHH18}"
+                            app:maxValue="10"
                             app:minValue="1"
                             app:type="range" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh19cv"
                     style="@style/cardView">
 
-                    <LinearLayout style="@style/vlinearlayout">
-
-                        <TextView
-                            style="@style/i_textview"
-                            android:text="@string/hh19" />
-
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/hh19"
-                            style="@style/EditTextNum"
-                            android:hint="@string/hh10a"
-                            android:maxLength="2"
-                            app:maxValue="25"
-                            app:minValue="1"
-                            app:type="range" />
+                    <LinearLayout
+                        android:id="@+id/ll19Items"
+                        style="@style/vlinearlayout">
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/hh20cv"
-                    style="@style/cardView">
-
-                    <LinearLayout style="@style/vlinearlayout">
-
-                        <TextView
-                            style="@style/i_textview"
-                            android:text="@string/hh20" />
-
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/hh20"
-                            style="@style/EditTextNum"
-                            android:hint="@string/hh20"
-                            android:maxLength="2"
-                            app:maxValue="25"
-                            app:minValue="1"
-                            app:type="range" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hhIsNewFamcv"
