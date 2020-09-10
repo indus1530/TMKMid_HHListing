@@ -110,11 +110,37 @@
 
                         <EditText
                             android:id="@+id/hh09"
+                            style="@style/EditTextAlpha"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:hint="@string/name"
+                            android:maxLength="24" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/hh16cv"
+                    style="@style/cardView">
+
+                    <LinearLayout style="@style/hlinearlayout">
+
+                        <TextView
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/hh15" />
+
+                        <EditText
+                            android:id="@+id/hh16"
                             style="@style/EditTextNum"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:hint="@string/num"
-                            android:maxLength="11" />
+                            android:hint="@string/hh15"
+                            android:maxLength="24" />
 
                     </LinearLayout>
 
@@ -181,6 +207,21 @@
 
                         </RadioGroup>
 
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/hh11cv"
+                    style="@style/cardView"
+                    android:visibility="@{hh10a.checked ? View.VISIBLE : View.GONE}">
+
+                    <LinearLayout style="@style/vlinearlayout">
+
+                        <TextView
+                            style="@style/i_textview"
+                            android:text="@string/hh10" />
+
                         <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/hh11"
                             style="@style/EditTextNum"
@@ -188,7 +229,6 @@
                             android:maxLength="2"
                             android:onTextChanged="@{callback.onTextChangedHH11}"
                             android:text='@{hh10a.checked ? hh11.getText().toString() : ""}'
-                            android:visibility="@{hh10a.checked ? View.VISIBLE : View.GONE}"
                             app:maxValue="0"
                             app:minValue="1"
                             app:type="range" />
@@ -210,7 +250,8 @@
 
                         <RadioGroup
                             android:id="@+id/hh12"
-                            style="@style/hradiogroup">
+                            style="@style/hradiogroup"
+                            android:visibility="gone">
 
                             <RadioButton
                                 android:id="@+id/hh12a"
@@ -233,9 +274,30 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            android:text='@{hh12a.checked ? hh13.getText().toString() : ""}'
-                            android:visibility="@{hh12a.checked ? View.VISIBLE : View.GONE}"
-                            app:maxValue="0"
+                            app:maxValue="25"
+                            app:minValue="1"
+                            app:type="range" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/hh18cv"
+                    style="@style/cardView">
+
+                    <LinearLayout style="@style/vlinearlayout">
+
+                        <TextView
+                            style="@style/i_textview"
+                            android:text="@string/hh18" />
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/hh18"
+                            style="@style/EditTextNum"
+                            android:hint="@string/hh10a"
+                            android:maxLength="2"
+                            app:maxValue="25"
                             app:minValue="1"
                             app:type="range" />
 

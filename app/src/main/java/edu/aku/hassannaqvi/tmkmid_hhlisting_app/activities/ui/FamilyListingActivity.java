@@ -96,12 +96,13 @@ public class FamilyListingActivity extends AppCompatActivity {
         lc.setIsNewHH(bi.hhIsNewFam.isChecked() ? "1" : "2"); //New Family Add
         lc.setHh08(bi.hh08.getText().toString()); //HH Name
         lc.setHh09(bi.hh09.getText().toString()); //Father Name
-        lc.setHh16(); //Cast
+        lc.setHh16(bi.hh16.getText().toString()); //Cast
         lc.setHh14(bi.hh14.getText().toString()); //Total Members
         lc.setHh10(bi.hh10a.isChecked() ? "1" : bi.hh10b.isChecked() ? "2" : "0");
         lc.setHh11(bi.hh11.getText().toString().isEmpty() ? "0" : bi.hh11.getText().toString());
         lc.setHh12(bi.hh12a.isChecked() ? "1" : bi.hh12b.isChecked() ? "2" : "0");
         lc.setHh13(bi.hh13.getText().toString().isEmpty() ? "0" : bi.hh13.getText().toString());
+        lc.setHh18(bi.hh18.getText().toString().isEmpty() ? "0" : bi.hh18.getText().toString());
 
         Log.d(TAG, "SaveDraft: Structure " + lc.getHh03());
 
