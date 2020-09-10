@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="callback"
+            type="edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.ui.FamilyListingActivity" />
+
+        <variable
+            name="member"
+            type="edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members" />
+    </data>
+
+
+    <ScrollView
+        style="@style/i_scrollview"
+        android:fadeScrollbars="false"
+        android:fillViewport="true"
+        android:layoutDirection="rtl"
+        android:scrollbarSize="10dip"
+        android:textDirection="rtl"
+        tools:context=".activities.ui.FamilyListingActivity">
+
+        <LinearLayout
+            android:id="@+id/fldGrpSecMDL"
+            style="@style/vlinearlayout">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hh19cv"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/vlinearlayout">
+
+                    <TextView
+                        style="@style/i_textview"
+                        android:text="@string/hh19" />
+
+                    <com.edittextpicker.aliazaz.EditTextPicker
+                        android:id="@+id/hh19"
+                        style="@style/EditTextAlpha"
+                        android:hint="@string/hh19"
+                        android:maxLength="11" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hh20cv"
+                style="@style/cardView">
+
+                <LinearLayout style="@style/vlinearlayout">
+
+                    <TextView
+                        style="@style/i_textview"
+                        android:text="@string/hh20" />
+
+                    <com.edittextpicker.aliazaz.EditTextPicker
+                        android:id="@+id/hh20"
+                        style="@style/EditTextNum"
+                        android:hint="@string/hh20"
+                        android:maxLength="2"
+                        app:maxValue="25"
+                        app:minValue="1"
+                        app:type="range" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

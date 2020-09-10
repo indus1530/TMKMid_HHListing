@@ -39,6 +39,7 @@ public class ListingContract {
     private String hh17;
     private String hh18;
     private String hh19;
+    private String hh20;
     private String isNewHH;
     private String counter;
     private String DeviceID;
@@ -69,6 +70,14 @@ public class ListingContract {
 
     public void setHh19(String hh19) {
         this.hh19 = hh19;
+    }
+
+    public String getHh20() {
+        return hh20;
+    }
+
+    public void setHh20(String hh20) {
+        this.hh20 = hh20;
     }
 
     public String getTotalhh() {
@@ -498,6 +507,7 @@ public class ListingContract {
         lc.setHh17(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH17))));
         lc.setHh18(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH18))));
         lc.setHh19(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH19))));
+        lc.setHh20(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH20))));
         lc.setDeviceID(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_DEVICEID))));
         lc.setGPSLat(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLat))));
         lc.setGPSLng(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLng))));
@@ -599,6 +609,7 @@ public class ListingContract {
         public static final String COLUMN_NAME_HH17 = "hh17";
         public static final String COLUMN_NAME_HH18 = "hh18";
         public static final String COLUMN_NAME_HH19 = "hh19";
+        public static final String COLUMN_NAME_HH20 = "hh20";
         public static final String COLUMN_ISNEWHH = "isnewhh";
         public static final String COLUMN_COUNTER = "counter";
         public static final String COLUMN_NAME_DEVICEID = "deviceid";

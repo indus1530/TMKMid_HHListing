@@ -105,6 +105,7 @@ public class FamilyListingActivity extends AppCompatActivity {
         lc.setHh17(bi.hh17a.isChecked() ? "1" : bi.hh17b.isChecked() ? "2" : "0");
         lc.setHh18(bi.hh18.getText().toString().isEmpty() ? "-1" : bi.hh18.getText().toString());
         lc.setHh19(bi.hh19.getText().toString().isEmpty() ? "-1" : bi.hh19.getText().toString());
+        lc.setHh20(bi.hh20.getText().toString().isEmpty() ? "-1" : bi.hh20.getText().toString());
 
         Log.d(TAG, "SaveDraft: Structure " + lc.getHh03());
 

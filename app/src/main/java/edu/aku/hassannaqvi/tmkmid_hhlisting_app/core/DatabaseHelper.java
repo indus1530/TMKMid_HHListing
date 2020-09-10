@@ -242,6 +242,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         values.put(ListingEntry.COLUMN_NAME_HH04, lc.getHh04());
         values.put(ListingEntry.COLUMN_NAME_HH19, lc.getHh19());
+        values.put(ListingEntry.COLUMN_NAME_HH20, lc.getHh20());
         values.put(ListingEntry.COLUMN_NAME_HH05, lc.getHh05());
         values.put(ListingEntry.COLUMN_NAME_HH06, lc.getHh06());
         values.put(ListingEntry.COLUMN_NAME_HH07, lc.getHh07());
