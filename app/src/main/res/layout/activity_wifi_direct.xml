@@ -12,7 +12,7 @@
 
         <fragment
             android:id="@+id/frag_list"
-            class="edu.aku.hassannaqvi.tpvics_hhlisting_app.WifiDirect.DeviceListFragment"
+            class="edu.aku.hassannaqvi.tmkmid_hhlisting_app.wifiDirect.DeviceListFragment"
             android:layout_width="match_parent"
             android:layout_height="@dimen/phone_list_height">
             <!-- Preview: layout=@layout/row_devices -->
@@ -20,7 +20,7 @@
 
         <fragment
             android:id="@+id/frag_detail"
-            class="edu.aku.hassannaqvi.tpvics_hhlisting_app.WifiDirect.DeviceDetailFragment"
+            class="edu.aku.hassannaqvi.tmkmid_hhlisting_app.wifiDirect.DeviceDetailFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <!-- Preview: layout=@layout/device_detail -->

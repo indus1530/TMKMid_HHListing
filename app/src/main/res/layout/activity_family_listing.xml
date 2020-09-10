@@ -9,11 +9,11 @@
 
         <variable
             name="callback"
-            type="edu.aku.hassannaqvi.tpvics_hhlisting_app.activities.ui.FamilyListingActivity" />
+            type="edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.ui.FamilyListingActivity" />
 
         <variable
             name="member"
-            type="edu.aku.hassannaqvi.tpvics_hhlisting_app.models.Members" />
+            type="edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members" />
     </data>
 
 
