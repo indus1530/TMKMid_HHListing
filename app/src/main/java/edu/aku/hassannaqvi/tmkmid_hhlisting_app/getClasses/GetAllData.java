@@ -20,10 +20,10 @@ import java.net.URL;
 import java.util.List;
 
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.adapters.SyncListAdapter;
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.DistrictContract;
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.EnumBlockContract;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.UCContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.UsersContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.VersionAppContract;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.VillageContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.DatabaseHelper;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.SyncModel;
@@ -57,10 +57,10 @@ public class GetAllData extends AsyncTask<String, String, String> {
             case "VersionApp":
                 position = 1;
                 break;
-            case "District":
+            case "UCs":
                 position = 2;
                 break;
-            case "EnumBlock":
+            case "Villages":
                 position = 0;
                 break;
         }
@@ -91,10 +91,10 @@ public class GetAllData extends AsyncTask<String, String, String> {
             case "VersionApp":
                 position = 1;
                 break;
-            case "District":
+            case "UCs":
                 position = 2;
                 break;
-            case "EnumBlock":
+            case "Villages":
                 position = 0;
                 break;
         }
@@ -110,24 +110,28 @@ public class GetAllData extends AsyncTask<String, String, String> {
     protected String doInBackground(String... args) {
 
         StringBuilder result = new StringBuilder();
+        String tableName = "";
 
         URL url = null;
         try {
             switch (syncClass) {
                 case "User":
-                    url = new URL(MainApp._HOST_URL + UsersContract.UsersTable._URI);
+                    url = new URL(MainApp._HOST_URL + MainApp._SERVER_GET_URL);
+                    tableName = UsersContract.UsersTable.TABLE_NAME;
                     position = 0;
                     break;
                 case "VersionApp":
                     url = new URL(MainApp._UPDATE_URL + VersionAppContract.VersionAppTable._URI);
                     position = 1;
                     break;
-                case "District":
-                    url = new URL(MainApp._HOST_URL + DistrictContract.DistrictTable._URI);
+                case "UCs":
+                    url = new URL(MainApp._HOST_URL + MainApp._SERVER_GET_URL);
+                    tableName = UCContract.UCTable.TABLE_NAME;
                     position = 2;
                     break;
-                case "EnumBlock":
-                    url = new URL(MainApp._HOST_URL + EnumBlockContract.EnumBlockTable._URI);
+                case "Villages":
+                    url = new URL(MainApp._HOST_URL + MainApp._SERVER_GET_URL);
+                    tableName = VillageContract.VillageTable.TABLE_NAME;
                     position = 0;
                     break;
             }
@@ -137,7 +141,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
             urlConnection.setConnectTimeout(150000 /* milliseconds */);
 
             switch (syncClass) {
-                case "District":
+                case "UCs":
                 case "User":
                     urlConnection.setRequestMethod("POST");
                     urlConnection.setDoOutput(true);
@@ -151,7 +155,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
                     JSONObject json = new JSONObject();
                     try {
-                        json.put("user", "test1234");
+                        json.put("table", tableName);
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
@@ -162,7 +166,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     break;
 
 
-                case "EnumBlock":
+                case "Villages":
                     urlConnection.setRequestMethod("POST");
                     urlConnection.setDoOutput(true);
                     urlConnection.setDoInput(true);
@@ -175,7 +179,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     DataOutputStream wr2 = new DataOutputStream(urlConnection.getOutputStream());
                     JSONObject json2 = new JSONObject();
                     try {
-                        json2.put("user", "test1234");
+                        json2.put("table", tableName);
                         json2.put("dist_id", MainApp.DIST_ID);
                     } catch (JSONException e1) {
                         e1.printStackTrace();
@@ -212,8 +216,6 @@ public class GetAllData extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPostExecute(String result) {
-
-
         //Do something with the JSON string
         if (result != null) {
             if (result.length() > 0) {
@@ -233,17 +235,16 @@ public class GetAllData extends AsyncTask<String, String, String> {
                             if (insertCount == 1) jsonArray.put("1");
                             position = 1;
                             break;
-                        case "District":
+                        case "UCs":
                             jsonArray = new JSONArray(result);
-                            insertCount = db.syncDistrict(jsonArray);
+                            insertCount = db.syncUCs(jsonArray);
                             position = 2;
                             break;
-                        case "EnumBlock":
+                        case "Villages":
                             jsonArray = new JSONArray(result);
-                            insertCount = db.syncEnumBlocks(jsonArray);
+                            insertCount = db.syncVillages(jsonArray);
                             position = 0;
                             break;
-
                     }
 
                     pd.setMessage("Received: " + jsonArray.length());
@@ -251,7 +252,6 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     list.get(position).setstatus(insertCount == 0 ? "Unsuccessful" : "Successful");
                     list.get(position).setstatusID(insertCount == 0 ? 2 : 3);
                     adapter.updatesyncList(list);
-                    // pd.show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -261,7 +261,6 @@ public class GetAllData extends AsyncTask<String, String, String> {
                 list.get(position).setstatus("Processed");
                 list.get(position).setstatusID(4);
                 adapter.updatesyncList(list);
-                // pd.show();
             }
         } else {
             pd.setTitle("Connection Error");
@@ -270,7 +269,6 @@ public class GetAllData extends AsyncTask<String, String, String> {
             list.get(position).setstatusID(1);
             list.get(position).setmessage("Server not found!");
             adapter.updatesyncList(list);
-            // pd.show();
         }
 
 

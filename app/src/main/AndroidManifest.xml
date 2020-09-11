@@ -44,7 +44,6 @@
             android:name=".activities.other.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme1"
-            android:label="Household Linelisting"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.sync.SyncActivity"

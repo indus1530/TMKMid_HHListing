@@ -39,7 +39,6 @@ import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt.dbBack
 public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDevicInterface {
     SharedPreferences.Editor editor;
     SharedPreferences sharedPref;
-    String DirectoryName;
     DatabaseHelper db;
     SyncListAdapter syncListAdapter;
     UploadListAdapter uploadListAdapter;
@@ -87,7 +86,7 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
             bi.lbls.setText("DOWNLOADING DATA FROM SERVER");
             /*if (sync_flag) new SyncData(SyncActivity.this, MainApp.DIST_ID).execute(true);
             else new SyncDevice(SyncActivity.this, true).execute();*/
-            new SyncData(SyncActivity.this, MainApp.DIST_ID).execute(sync_flag);
+            new SyncData(SyncActivity.this).execute(sync_flag);
         } else {
             Toast.makeText(this, "No network connection available.", Toast.LENGTH_SHORT).show();
         }
@@ -122,8 +121,6 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
     }
 
     public void syncServer() {
-//        if(true) return;
-
         // Require permissions INTERNET & ACCESS_NETWORK_STATE
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -170,7 +167,7 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
     @Override
     public void processFinish(boolean flag) {
         if (flag) {
-            new SyncData(SyncActivity.this, MainApp.DIST_ID).execute(true);
+            new SyncData(SyncActivity.this).execute(true);
         }
     }
 
@@ -184,17 +181,16 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
     private class SyncData extends AsyncTask<Boolean, String, String> {
 
         private Context mContext;
-        private String distID;
 
-        private SyncData(Context mContext, String districtId) {
+        private SyncData(Context mContext) {
             this.mContext = mContext;
-            this.distID = districtId;
         }
 
         @Override
         protected String doInBackground(Boolean... booleans) {
             runOnUiThread(() -> {
                 new SyncDevice(SyncActivity.this, false).execute();
+
                 if (booleans[0]) {
 //                  getting Users!!
                     if (listActivityCreated) {
@@ -212,22 +208,23 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
                     }
                     new GetAllData(mContext, "VersionApp", syncListAdapter, list).execute();
 
-//                  getting Districts!!
+//                    Getting UCs!!
                     if (listActivityCreated) {
                         model = new SyncModel();
                         model.setstatusID(0);
                         list.add(model);
                     }
-                    new GetAllData(mContext, "District", syncListAdapter, list).execute();
+                    new GetAllData(mContext, "UCs", syncListAdapter, list).execute();
                     bi.noItem.setVisibility(View.GONE);
                 } else {
-//                    Getting Enumblocks
+
+//                    Getting Villages
                     if (listActivityCreated) {
                         model = new SyncModel();
                         model.setstatusID(0);
                         list.add(model);
                     }
-                    new GetAllData(mContext, "EnumBlock", syncListAdapter, list).execute();
+                    new GetAllData(mContext, "Villages", syncListAdapter, list).execute();
                     bi.noItem.setVisibility(View.GONE);
                 }
 

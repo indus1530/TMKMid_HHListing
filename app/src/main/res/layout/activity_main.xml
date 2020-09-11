@@ -67,11 +67,40 @@
                 android:visibility="gone" />
 
 
+            <!--Districts-->
+            <androidx.cardview.widget.CardView
+                style="@style/cardView"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    style="@style/linearlayout_view"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/i_textview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="District" />
+
+                    <Spinner
+                        android:id="@+id/spinnerDistrict"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="2" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/checkPSUcv"
                 style="@style/cardView">
 
                 <LinearLayout
+                    android:background="@drawable/background_border"
                     style="@style/hlinearlayout"
                     android:padding="20dp">
 

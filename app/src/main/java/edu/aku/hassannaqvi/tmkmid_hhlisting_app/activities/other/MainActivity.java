@@ -18,6 +18,7 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -38,16 +39,17 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.map.MapsActivity;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.menu.MenuActivity;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.ui.SetupActivity;
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.EnumBlockContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.ListingContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.VersionAppContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.VerticesContract;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.VillageContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.AndroidDatabaseManager;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.AndroidUtilityKt;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.ActivityMainBinding;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.WarningActivityInterface;
+import io.reactivex.Observable;
 
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS.REQUEST_APP_UPDATE;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS.REQUEST_PSU_EXIST;
@@ -183,6 +185,24 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+    }
+
 
     //Screen Buttons
     public void CheckClusterBtn(View v) {
@@ -192,7 +212,7 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             return;
         }
 
-        if (!bi.txtPSU.getText().toString().isEmpty()) {
+        if (!bi.txtPSU.getText().toString().isEmpty() && bi.spinnerDistrict.getSelectedItemPosition() != 0) {
 
             bi.txtPSU.setError(null);
             boolean loginFlag;
@@ -203,9 +223,9 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
                 loginFlag = MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user");
             }
             if (loginFlag) {
-                EnumBlockContract enumBlockContract = appInfo.getDbHelper().getEnumBlock(bi.txtPSU.getText().toString());
-                if (enumBlockContract != null) {
-                    String selected = enumBlockContract.getGeoarea();
+                VillageContract villageContract = appInfo.getDbHelper().getEnumBlock(bi.txtPSU.getText().toString());
+                if (villageContract != null) {
+                    String selected = villageContract.getVillage_name();
 
                     if (!selected.equals("")) {
 
@@ -229,8 +249,8 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
                         });
 
                         MainApp.hh02txt = bi.txtPSU.getText().toString();
-                        MainApp.enumCode = enumBlockContract.getDist_id();
-                        MainApp.enumStr = enumBlockContract.getGeoarea();
+                        MainApp.enumCode = villageContract.getVillage_code();
+                        MainApp.enumStr = villageContract.getVillage_name();
                         MainApp.clusterCode = bi.txtPSU.getText().toString();
                     }
                 } else {
@@ -286,6 +306,17 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
     //Other Dependent Functions
     private void setUIContent() {
+        bi.spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                bi.txtPSU.setText(null);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
 
@@ -309,24 +340,6 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
                 "Install",
                 "Cancel"
         );
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (exit) {
-            finish(); // finish activity
-            startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.", Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 3 * 1000);
-
-        }
     }
 
     //Async tasks
@@ -394,6 +407,14 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             Asycdialog.dismiss();
             Toast.makeText(mContext, "Copying done!!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    //Reactive Streams
+    private Observable<VillageContract> getSpecificFUP() {
+        return Observable.create(emitter -> {
+            emitter.onNext(appInfo.getDbHelper().getEnumBlock(bi.pid.getText().toString()));
+            emitter.onComplete();
+        });
     }
 
 }

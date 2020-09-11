@@ -135,7 +135,7 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
                         editor.apply();
 
                         if (flag) {
-                            delegate.processFinish(true);
+                            delegate.processFinish(false);
                         }
 
                     } else if (jsonObject.getString("status").equals("0") && jsonObject.getString("error").equals("1")) {
@@ -145,7 +145,7 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
                 }
             } else {
                 if (flag) {
-                    delegate.processFinish(true);
+                    delegate.processFinish(false);
                 }
             }
 
@@ -153,7 +153,7 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
             e.printStackTrace();
             Toast.makeText(context, "Failed to get TAG ID " + result, Toast.LENGTH_SHORT).show();
             if (flag) {
-                delegate.processFinish(true);
+                delegate.processFinish(false);
             }
         }
     }

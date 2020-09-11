@@ -70,7 +70,7 @@ import butterknife.OnClick;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.sync.SyncActivity;
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.DistrictContract;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.UCContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.AppInfo;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.DatabaseHelper;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
@@ -258,14 +258,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void setListeners() {
-        provinceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, SplashscreenActivity.provinces);
+        provinceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, SplashscreenActivity.ucs);
         spinnerProvince.setAdapter(provinceAdapter);
         spinnerProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) return;
                 List<String> districts = new ArrayList<>(Collections.singletonList("...."));
-                for (Map.Entry<String, Pair<String, DistrictContract>> entry : SplashscreenActivity.districtsMap.entrySet()) {
+                for (Map.Entry<String, Pair<String, UCContract>> entry : SplashscreenActivity.ucsMap.entrySet()) {
                     if (entry.getValue().getFirst().equals(spinnerProvince.getSelectedItem().toString()))
                         districts.add(entry.getKey());
                 }
@@ -282,7 +282,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) return;
-                MainApp.DIST_ID = Objects.requireNonNull(SplashscreenActivity.districtsMap.get(spinnerDistrict.getSelectedItem().toString())).getSecond().getDist_id();
+                MainApp.DIST_ID = Objects.requireNonNull(SplashscreenActivity.ucsMap.get(spinnerDistrict.getSelectedItem().toString())).getSecond().getUc_code();
             }
 
             @Override

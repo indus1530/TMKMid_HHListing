@@ -2,8 +2,9 @@ package edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository
 
 import android.content.Context
 import android.widget.ArrayAdapter
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other.SplashscreenActivity.Companion.districtsMap
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other.SplashscreenActivity.Companion.provinces
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other.SplashscreenActivity.Companion.ucs
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other.SplashscreenActivity.Companion.ucsMap
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.UCContract
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.DatabaseHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -12,38 +13,22 @@ import kotlinx.coroutines.withContext
 
 private suspend fun getEnumGeoArea(context: Context) = withContext(Dispatchers.IO) {
     val db = DatabaseHelper(context)
-    return@withContext db.districtProv
+    return@withContext db.uCs
 }
 
-suspend fun getEnumData(context: Context): MutableMap<String, String> {
-    val enumLst = getEnumGeoArea(context)
-    val splitLst: MutableMap<String, String> = mutableMapOf()
-    enumLst.forEach { item ->
-        splitLst[item.district] = item.province
-    }
-    return splitLst
-}
-
-private suspend fun getEnumContract(context: Context, province: String, district: String) = withContext(Dispatchers.IO) {
-    val db = DatabaseHelper(context)
-    return@withContext db.districtProv.find { it.district == district }
-}
-
-suspend fun setProvinceDistricts(context: Context, def: MutableMap<String, String>, adapter: ArrayAdapter<String>) {
-    def.entries.forEach { item ->
-        if (!provinces.contains(item.value)) {
-            provinces.add(item.value)
-            adapter.notifyDataSetChanged()
-        }
-        getEnumContract(context, item.value, item.key)?.let { districtsMap[item.key] = Pair(item.value, it) }
+fun setUcs(def: MutableList<UCContract>, adapter: ArrayAdapter<String>) {
+    def.forEach { item ->
+        ucs.add(item.uc_name)
+        adapter.notifyDataSetChanged()
+        ucsMap[item.uc_name] = item
     }
 }
 
 suspend fun populatingSpinners(context: Context, adapter: ArrayAdapter<String>) {
     GlobalScope.launch {
-        val def = withContext(Dispatchers.Main) { getEnumData(context) }
+        val def = withContext(Dispatchers.Main) { getEnumGeoArea(context) }
         if (def.isNotEmpty())
-            withContext(Dispatchers.Main) { setProvinceDistricts(context, def, adapter) }
+            withContext(Dispatchers.Main) { setUcs(def, adapter) }
     }
 }
 
