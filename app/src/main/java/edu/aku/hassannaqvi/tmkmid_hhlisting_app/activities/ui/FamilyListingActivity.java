@@ -115,10 +115,10 @@ public class FamilyListingActivity extends AppCompatActivity {
         lc.setHh07(MainApp.hh07txt);
         lc.setHh15(bi.deleteHH.isChecked() ? "1" : "-1"); //Delete Family
         lc.setIsNewHH(bi.hhIsNewFam.isChecked() ? "1" : "2"); //New Family Add
-        lc.setHh08(bi.hh08.getText().toString()); //HH Name
-        lc.setHh09(bi.hh09.getText().toString()); //Father Name
-        lc.setHh16(bi.hh16.getText().toString()); //Cast
-        lc.setHh14(bi.hh14.getText().toString()); //Total Members
+        lc.setHh08(bi.hh08.getText().toString().isEmpty() ? "-1" : bi.hh08.getText().toString()); //HH Name
+        lc.setHh09(bi.hh09.getText().toString().isEmpty() ? "-1" : bi.hh09.getText().toString()); //Father Name
+        lc.setHh16(bi.hh16.getText().toString().isEmpty() ? "-1" : bi.hh16.getText().toString()); //Cast
+        lc.setHh14(bi.hh14.getText().toString().isEmpty() ? "-1" : bi.hh14.getText().toString()); //Total Members
         lc.setHh10(bi.hh10a.isChecked() ? "1" : bi.hh10b.isChecked() ? "2" : "-1");
         lc.setHh11(bi.hh11.getText().toString().isEmpty() ? "-1" : bi.hh11.getText().toString());
         lc.setHh12(bi.hh12.getText().toString().isEmpty() ? "-1" : bi.hh12.getText().toString());

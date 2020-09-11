@@ -318,7 +318,8 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh18cv"
-                    style="@style/cardView">
+                    style="@style/cardView"
+                    android:visibility="@{hh17b.checked ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout style="@style/vlinearlayout">
 
@@ -331,6 +332,7 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
+                            android:text='@{hh17a.checked ? hh18.getText().toString() : ""}'
                             android:onTextChanged="@{callback.onTextChangedHH18}"
                             app:maxValue="10"
                             app:minValue="1"
