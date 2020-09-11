@@ -128,7 +128,6 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
         //Database handler
         bi.msgText.setText(String.format("%s records found in Listings table.", appInfo.getDbHelper().getListingCount()));
-        setUIContent();
 
         // Auto download app
         sharedPrefDownload = getSharedPreferences("appDownload", MODE_PRIVATE);
@@ -176,6 +175,8 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             bi.testing.setVisibility(View.GONE);
         else
             bi.testing.setVisibility(View.VISIBLE);
+
+        setUIContent();
     }
 
     @Override
@@ -214,6 +215,11 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gettingVillageData();
+    }
 
     //Screen Buttons
     public void CheckClusterBtn(View v) {
@@ -320,24 +326,6 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
     //Other Dependent Functions
     private void setUIContent() {
-        villageName = new ArrayList<String>() {
-            {
-                add("....");
-            }
-        };
-        villageMap = new HashMap<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, villageName);
-        bi.spVillage.setAdapter(adapter);
-        getVillages()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(vcontract -> {
-                    for (VillageContract village : vcontract) {
-                        villageName.add(village.getVillage_name());
-                        villageMap.put(village.getVillage_name(), village);
-                    }
-                    adapter.notifyDataSetChanged();
-                });
         bi.spVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -449,6 +437,30 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             emitter.onNext(appInfo.getDbHelper().getEnumBlock());
             emitter.onComplete();
         });
+    }
+
+
+    //Getting data from db
+    public void gettingVillageData() {
+        villageName = new ArrayList<String>() {
+            {
+                add("....");
+            }
+        };
+        villageMap = new HashMap<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, villageName);
+        bi.spVillage.setAdapter(adapter);
+        getVillages()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(vcontract -> {
+                    for (VillageContract village : vcontract) {
+                        villageName.add(village.getVillage_name());
+                        villageMap.put(village.getVillage_name(), village);
+                    }
+                    adapter.notifyDataSetChanged();
+                }, error -> {
+                });
     }
 
 }
