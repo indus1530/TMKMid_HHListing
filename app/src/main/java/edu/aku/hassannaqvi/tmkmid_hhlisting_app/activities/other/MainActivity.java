@@ -240,13 +240,16 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
                     if (!selected.equals("")) {
 
-                        String[] selSplit = selected.split("\\|");
+                        /*String[] selSplit = selected.split("\\|");
 
                         bi.na101a.setText(selSplit[0]);
                         bi.na101b.setText(selSplit[1].equals("") ? "----" : selSplit[1]);
                         bi.na101c.setText(selSplit[2].equals("") ? "----" : selSplit[2]);
                         bi.na101d.setText(selSplit[3]);
-                        clusterName = selSplit[3];
+                        clusterName = selSplit[3];*/
+
+                        bi.na101d.setText(selected);
+                        clusterName = selected;
 
                         bi.fldGrpna101.setVisibility(View.VISIBLE);
                         bi.chkconfirm.setOnCheckedChangeListener((compoundButton, b) -> {
