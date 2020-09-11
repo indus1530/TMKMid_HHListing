@@ -58,7 +58,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -70,11 +69,9 @@ import butterknife.OnClick;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.sync.SyncActivity;
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.UCContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.AppInfo;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.DatabaseHelper;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
-import kotlin.Pair;
 import kotlin.Unit;
 import kotlin.coroutines.CoroutineContext;
 
@@ -134,13 +131,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     DatabaseHelper db;
     private UserLoginTask mAuthTask = null;
     private int clicks;
-    ArrayAdapter<String> provinceAdapter;
-    @BindView(R.id.spinnerProvince)
-    Spinner spinnerProvince;
+    ArrayAdapter<String> ucsAdapter;
+    @BindView(R.id.spUCs)
+    Spinner spUCs;
     @BindView(R.id.spinners)
     LinearLayout spinners;
-    @BindView(R.id.spinnerDistrict)
-    Spinner spinnerDistrict;
 
     public static String getDeviceId(Context context) {
 
@@ -258,31 +253,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private void setListeners() {
-        provinceAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, SplashscreenActivity.ucs);
-        spinnerProvince.setAdapter(provinceAdapter);
-        spinnerProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ucsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, SplashscreenActivity.ucs);
+        spUCs.setAdapter(ucsAdapter);
+        spUCs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) return;
-                List<String> districts = new ArrayList<>(Collections.singletonList("...."));
-                for (Map.Entry<String, Pair<String, UCContract>> entry : SplashscreenActivity.ucsMap.entrySet()) {
-                    if (entry.getValue().getFirst().equals(spinnerProvince.getSelectedItem().toString()))
-                        districts.add(entry.getKey());
-                }
-                spinnerDistrict.setAdapter(new ArrayAdapter<>(LoginActivity.this, android.R.layout.simple_list_item_1
-                        , districts));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) return;
-                MainApp.DIST_ID = Objects.requireNonNull(SplashscreenActivity.ucsMap.get(spinnerDistrict.getSelectedItem().toString())).getSecond().getUc_code();
+                MainApp.DIST_ID = Objects.requireNonNull(SplashscreenActivity.ucsMap.get(spUCs.getSelectedItem().toString())).getUc_code();
             }
 
             @Override
@@ -679,7 +656,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private void callingCoroutine() {
         //To call coroutine here
-        populatingSpinners(getApplicationContext(), provinceAdapter, new SplashscreenActivity.Continuation<Unit>() {
+        populatingSpinners(getApplicationContext(), ucsAdapter, new SplashscreenActivity.Continuation<Unit>() {
             @Override
             public void resume(Unit value) {
 

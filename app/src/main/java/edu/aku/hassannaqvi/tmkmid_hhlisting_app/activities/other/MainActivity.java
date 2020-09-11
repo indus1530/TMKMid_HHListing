@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
@@ -30,9 +31,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
@@ -50,6 +54,8 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.ActivityMainBinding;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.WarningActivityInterface;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS.REQUEST_APP_UPDATE;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS.REQUEST_PSU_EXIST;
@@ -68,6 +74,11 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
     SharedPreferences.Editor editorDownload;
     ActivityMainBinding bi;
     private String clusterName;
+
+    //Setting Spinner
+    List<String> villageName;
+    Map<String, VillageContract> villageMap;
+
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -212,18 +223,18 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             return;
         }
 
-        if (!bi.txtPSU.getText().toString().isEmpty() && bi.spinnerDistrict.getSelectedItemPosition() != 0) {
+        if (!bi.txtPSU.getText().toString().isEmpty() && bi.spVillage.getSelectedItemPosition() != 0) {
 
             bi.txtPSU.setError(null);
-            boolean loginFlag;
-            int cluster = Integer.parseInt(bi.txtPSU.getText().toString().substring(0, 3));
+            boolean loginFlag = true;
+            /*int cluster = Integer.parseInt(bi.txtPSU.getText().toString().substring(0, 3));
             if (cluster < 900) {
                 loginFlag = !(MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user"));
             } else {
                 loginFlag = MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user");
-            }
+            }*/
             if (loginFlag) {
-                VillageContract villageContract = appInfo.getDbHelper().getEnumBlock(bi.txtPSU.getText().toString());
+                VillageContract villageContract = appInfo.getDbHelper().getEnumBlock(bi.txtPSU.getText().toString(), villageMap.get(bi.spVillage.getSelectedItem().toString()).getVillage_code());
                 if (villageContract != null) {
                     String selected = villageContract.getVillage_name();
 
@@ -306,7 +317,25 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
     //Other Dependent Functions
     private void setUIContent() {
-        bi.spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        villageName = new ArrayList<String>() {
+            {
+                add("....");
+            }
+        };
+        villageMap = new HashMap<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, villageName);
+        bi.spVillage.setAdapter(adapter);
+        getVillages()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(vcontract -> {
+                    for (VillageContract village : vcontract) {
+                        villageName.add(village.getVillage_name());
+                        villageMap.put(village.getVillage_name(), village);
+                    }
+                    adapter.notifyDataSetChanged();
+                });
+        bi.spVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 bi.txtPSU.setText(null);
@@ -341,6 +370,7 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
                 "Cancel"
         );
     }
+
 
     //Async tasks
     public static class CopyTask extends AsyncTask<Void, Void, Void> {
@@ -409,10 +439,11 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
         }
     }
 
+
     //Reactive Streams
-    private Observable<VillageContract> getSpecificFUP() {
+    private Observable<List<VillageContract>> getVillages() {
         return Observable.create(emitter -> {
-            emitter.onNext(appInfo.getDbHelper().getEnumBlock(bi.pid.getText().toString()));
+            emitter.onNext(appInfo.getDbHelper().getEnumBlock());
             emitter.onComplete();
         });
     }

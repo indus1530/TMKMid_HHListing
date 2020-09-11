@@ -9,5 +9,5 @@
     <corners android:radius="10px" />
     <stroke
         android:width="3px"
-        android:color="@color/black_overlay" />
+        android:color="@color/grayOverlay" />
 </shape>

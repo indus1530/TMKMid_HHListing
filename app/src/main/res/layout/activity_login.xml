@@ -200,13 +200,14 @@
                         <TextView
                             style="@style/i_textview"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
                             android:layout_weight="1"
                             android:text="Select UC"
                             android:textAlignment="center" />
 
                         <Spinner
-                            android:id="@+id/spinnerProvince"
+                            android:id="@+id/spUCs"
                             style="@null"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"

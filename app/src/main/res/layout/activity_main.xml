@@ -23,7 +23,7 @@
                 android:id="@+id/testing"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorRedsub"
+                android:background="@color/colorPrimaryAlpha1"
                 android:elevation="6dp"
                 android:gravity="center"
                 android:keepScreenOn="true"
@@ -69,11 +69,12 @@
 
             <!--Districts-->
             <androidx.cardview.widget.CardView
-                style="@style/cardView"
-                android:layout_marginTop="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    style="@style/linearlayout_view"
+                    style="@style/linearlayout_view_wt_bound"
+                    android:layout_height="match_parent"
                     android:layoutDirection="ltr"
                     android:orientation="horizontal">
 
@@ -82,10 +83,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="District" />
+                        android:gravity="center"
+                        android:text="Select Village"
+                        android:textAlignment="center" />
 
                     <Spinner
-                        android:id="@+id/spinnerDistrict"
+                        android:id="@+id/spVillage"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -97,11 +100,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/checkPSUcv"
-                style="@style/cardView">
+                style="@style/cardView"
+                android:layout_margin="20dp">
 
                 <LinearLayout
-                    android:background="@drawable/background_border"
                     style="@style/hlinearlayout"
+                    android:background="@drawable/background_border"
                     android:padding="20dp">
 
                     <EditText
@@ -111,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="70"
                         android:hint="@string/cluster_number"
-                        android:maxLength="9"
+                        android:maxLength="6"
                         android:onTextChanged="@{callback.txtPSUOnTextChanged}" />
 
                     <ImageButton

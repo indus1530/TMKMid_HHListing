@@ -180,7 +180,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     JSONObject json2 = new JSONObject();
                     try {
                         json2.put("table", tableName);
-                        json2.put("dist_id", MainApp.DIST_ID);
+                        json2.put("uc_code", MainApp.DIST_ID);
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
