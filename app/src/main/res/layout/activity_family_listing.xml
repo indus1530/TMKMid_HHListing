@@ -136,7 +136,7 @@
 
                         <EditText
                             android:id="@+id/hh16"
-                            style="@style/EditTextNum"
+                            style="@style/EditTextAlpha"
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:hint="@string/hh15"
