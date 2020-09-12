@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 
+import com.validatorcrawler.aliazaz.Validator;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -65,15 +67,13 @@ import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.appInfo;
 public class MainActivity extends MenuActivity implements WarningActivityInterface {
 
     public static String TAG = MainActivity.class.getName();
-    static File file;
-    String dtToday = new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date().getTime());
-    Boolean exit = false;
-    String preVer = "", newVer = "";
-    DownloadManager downloadManager;
-    SharedPreferences sharedPrefDownload;
-    SharedPreferences.Editor editorDownload;
-    ActivityMainBinding bi;
-    private String clusterName;
+    private static File file;
+    private Boolean exit = false;
+    private DownloadManager downloadManager;
+    private SharedPreferences sharedPrefDownload;
+    private SharedPreferences.Editor editorDownload;
+    private ActivityMainBinding bi;
+    private String preVer = "", newVer = "", clusterName;
 
     //Setting Spinner
     List<String> villageName;
@@ -221,6 +221,7 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
         gettingVillageData();
     }
 
+
     //Screen Buttons
     public void CheckClusterBtn(View v) {
 
@@ -229,22 +230,21 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             return;
         }
 
-        if (!bi.txtPSU.getText().toString().isEmpty() && bi.spVillage.getSelectedItemPosition() != 0) {
+        if (!Validator.emptyCheckingContainer(this, bi.fldGrpna10)) return;
 
-            bi.txtPSU.setError(null);
-            boolean loginFlag = true;
+        boolean loginFlag = true;
             /*int cluster = Integer.parseInt(bi.txtPSU.getText().toString().substring(0, 3));
             if (cluster < 900) {
                 loginFlag = !(MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user"));
             } else {
                 loginFlag = MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user");
             }*/
-            if (loginFlag) {
-                VillageContract villageContract = appInfo.getDbHelper().getEnumBlock(bi.txtPSU.getText().toString(), villageMap.get(bi.spVillage.getSelectedItem().toString()).getVillage_code());
-                if (villageContract != null) {
-                    String selected = villageContract.getVillage_name();
+        if (loginFlag) {
+            VillageContract villageContract = appInfo.getDbHelper().getEnumBlock(bi.txtPSU.getText().toString(), villageMap.get(bi.spVillage.getSelectedItem().toString()).getVillage_code());
+            if (villageContract != null) {
+                String selected = villageContract.getVillage_name();
 
-                    if (!selected.equals("")) {
+                if (!selected.equals("")) {
 
                         /*String[] selSplit = selected.split("\\|");
 
@@ -254,37 +254,34 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
                         bi.na101d.setText(selSplit[3]);
                         clusterName = selSplit[3];*/
 
-                        bi.na101d.setText(selected);
-                        clusterName = selected;
+                    bi.na101d.setText(selected);
+                    clusterName = selected;
 
-                        bi.fldGrpna101.setVisibility(View.VISIBLE);
-                        bi.chkconfirm.setOnCheckedChangeListener((compoundButton, b) -> {
-                            if (bi.chkconfirm.isChecked()) {
-                                bi.openForm.setBackgroundColor(getResources().getColor(R.color.green));
-                                bi.lllstwarning.setVisibility(View.VISIBLE);
-                                MainApp.hh01txt = 1;
-                            } else {
-                                bi.lllstwarning.setVisibility(View.GONE);
-                            }
-                        });
+                    bi.fldGrpna101.setVisibility(View.VISIBLE);
+                    bi.chkconfirm.setOnCheckedChangeListener((compoundButton, b) -> {
+                        if (bi.chkconfirm.isChecked()) {
+                            bi.openForm.setBackgroundColor(getResources().getColor(R.color.green));
+                            bi.lllstwarning.setVisibility(View.VISIBLE);
+                            MainApp.hh01txt = 1;
+                        } else {
+                            bi.lllstwarning.setVisibility(View.GONE);
+                        }
+                    });
 
-                        MainApp.hh02txt = bi.txtPSU.getText().toString();
-                        MainApp.enumCode = villageContract.getVillage_code();
-                        MainApp.enumStr = villageContract.getVillage_name();
-                        MainApp.clusterCode = bi.txtPSU.getText().toString();
-                    }
-                } else {
-                    Toast.makeText(this, "Sorry not found any block", Toast.LENGTH_SHORT).show();
-                    bi.lllstwarning.setVisibility(View.GONE);
+                    MainApp.hh02txt = bi.txtPSU.getText().toString();
+                    MainApp.enumCode = villageContract.getVillage_code();
+                    MainApp.enumStr = villageContract.getVillage_name();
+                    MainApp.clusterCode = bi.txtPSU.getText().toString();
                 }
             } else {
-                Toast.makeText(this, "Can't proceed test cluster for current user!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Sorry not found any block", Toast.LENGTH_SHORT).show();
                 bi.lllstwarning.setVisibility(View.GONE);
             }
         } else {
-            bi.txtPSU.setError("Data required!!");
-            bi.txtPSU.setFocusable(true);
+            Toast.makeText(this, "Can't proceed test cluster for current user!!", Toast.LENGTH_SHORT).show();
+            bi.lllstwarning.setVisibility(View.GONE);
         }
+
     }
 
     public void OpenClusterMapBtn(View view) {

@@ -15,8 +15,8 @@
     <string name="hh04i">"وڌيڪ عمارتون نھ آھن (ڪلسٽر مڪمل ٿي ويو( "</string>
     <string name="confirmcity">ڇا توھان مٿي بيان ڪيل ڳوٺ ۾ موجود آھيو؟</string>
     <string name="hh05">جيڪڏھن رھائشي آھي تھ ڇا ھن عمارت ۾ ھڪ کان وڌيڪ خاندان رھن ٿا؟</string>
-    <string name="hh06"> خاندان کی تعداد؟ </string>
-    <string name="hh07"> خاندان نمبر </string>
+    <string name="hh06"> گهرن جو تعداد؟ </string>
+    <string name="hh07"> خانداني نمبر </string>
     <string name="hh08">گھراڻي جي سربراھ جو نالو</string>
     <string name="hh09"> گھراڻي جي سربراھ جي پيءُ جو نالو؟ </string>
     <string name="hh10a"> تعداد </string>
@@ -29,17 +29,17 @@
     <string name="hh18">جيڪڏھن ھا تھ ڪيترن ڀاتين (فردن) جي وفات ٿي؟</string>
     <string name="hh19">وفات ڪندڙ فرد جي جنس؟</string>
     <string name="hh20">وفات ڪرڻ وقت ان جي عمر؟</string>
-    <string name="hhIsNewFam">" کیا اس گھر میں مذید کوئی خاندان رہائش پزیر ہے "</string>
-    <string name="hh14"> کیا یہ جگہ رہائشی مقاصد کے لئے استعمال کی جا رہی ہے؟ </string>
+    <string name="hhIsNewFam">ڇا ھن عمارت ۾ ڪو ٻيو / وڌيڪ خاندان رھي ٿو؟</string>
+    <string name="hh14">ڇا اها جڳهه رهائشي مقصدن لاءِ استعمال ڪئي پئي وڃي؟ </string>
     <string name="na101a"> ضلعہ </string>
     <string name="na101b">  تحصیل / تعلُقہ </string>
     <string name="na101c"> یونین کونسل </string>
-    <string name="na101d"> گاوُں/ محلہ </string>
-    <string name="yes"> ہاں </string>
-    <string name="no"> نہیں </string>
+    <string name="na101d"> ڳوٺ/ پاڙي </string>
+    <string name="yes"> ھا </string>
+    <string name="no"> نه </string>
     <string name="delete"> Delete this HH </string>
     <string name="lstWarning">کیا یہ پہلا ٹیب ہے جو اس کلسٹر میں استعمال ہوتا ہے؟</string>
-    <string name="name"> نام </string>
+    <string name="name"> نالو </string>
     <string name="num"> نمبر </string>
     <string name="other"> دیگر </string>
     <string name="specify"> وضاحت کریں </string>
@@ -54,9 +54,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="title_activity_maps">Map</string>
 
     <string name="client_text">This device will act as a client. Click on Gallery button to pick a local(stored) file</string>
