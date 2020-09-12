@@ -151,7 +151,7 @@ public class RandomListAdapter extends RecyclerView.Adapter<RandomListAdapter.Vi
         }
 
         public void bindUser(ListingContract contact) {
-            clusterCode.setText(contact.getClusterCode());
+            clusterCode.setText(contact.getAreaCode());
             resCount.setText("Residential Count: " + contact.getResCount());
             childCount.setText("Child < 5 Count: " + contact.getChildCount());
             rndCount.setText("Randomized Count: " + contact.getRandCount());

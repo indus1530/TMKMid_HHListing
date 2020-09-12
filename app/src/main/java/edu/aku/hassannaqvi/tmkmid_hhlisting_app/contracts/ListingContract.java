@@ -16,7 +16,7 @@ public class ListingContract {
     private String hhDT;
     private String hhDT01;
     private String enumCode;
-    private String clusterCode;
+    private String areaCode;
     private String enumStr;
     private String hh01;
     private String hh02;
@@ -39,7 +39,6 @@ public class ListingContract {
     private String hh17;
     private String hh18;
     private String hh19;
-    private String hh20;
     private String isNewHH;
     private String counter;
     private String DeviceID;
@@ -70,14 +69,6 @@ public class ListingContract {
 
     public void setHh19(String hh19) {
         this.hh19 = hh19;
-    }
-
-    public String getHh20() {
-        return hh20;
-    }
-
-    public void setHh20(String hh20) {
-        this.hh20 = hh20;
     }
 
     public String getTotalhh() {
@@ -120,12 +111,12 @@ public class ListingContract {
         this.childCount = childCount;
     }
 
-    public String getClusterCode() {
-        return clusterCode;
+    public String getAreaCode() {
+        return areaCode;
     }
 
-    public void setClusterCode(String clusterCode) {
-        this.clusterCode = clusterCode;
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
     }
 
     public String getID() {
@@ -437,7 +428,7 @@ public class ListingContract {
         json.put(ListingEntry.COLUMN_NAME_HHDATETIME, this.hhDT);
         json.put(ListingEntry.COLUMN_NAME_HHDATETIME01, this.hhDT01);
         json.put(ListingEntry.COLUMN_NAME_ENUMCODE, this.enumCode);
-        json.put(ListingEntry.COLUMN_NAME_CLUSTERCODE, this.clusterCode);
+        json.put(ListingEntry.COLUMN_NAME_AREACODE, this.areaCode);
         json.put(ListingEntry.COLUMN_NAME_ENUMSTR, this.enumStr);
         json.put(ListingEntry.COLUMN_NAME_HH01, this.hh01);
         json.put(ListingEntry.COLUMN_NAME_HH02, this.hh02);
@@ -484,7 +475,7 @@ public class ListingContract {
         lc.setHhDT(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HHDATETIME))));
         lc.setHhDT01(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HHDATETIME01))));
         lc.setEnumCode(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_ENUMCODE))));
-        lc.setClusterCode(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_CLUSTERCODE))));
+        lc.setAreaCode(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_AREACODE))));
         lc.setEnumStr(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_ENUMSTR))));
         lc.setHh01(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH01))));
         lc.setHh02(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH02))));
@@ -507,7 +498,6 @@ public class ListingContract {
         lc.setHh17(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH17))));
         lc.setHh18(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH18))));
         lc.setHh19(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH19))));
-        lc.setHh20(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH20))));
         lc.setDeviceID(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_DEVICEID))));
         lc.setGPSLat(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLat))));
         lc.setGPSLng(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLng))));
@@ -537,7 +527,7 @@ public class ListingContract {
         this.UID = jsonObject.getString(ListingEntry.COLUMN_NAME_UID);
         this.hhDT = jsonObject.getString(ListingEntry.COLUMN_NAME_HHDATETIME);
         this.enumCode = jsonObject.getString(ListingEntry.COLUMN_NAME_ENUMCODE);
-        this.clusterCode = jsonObject.getString(ListingEntry.COLUMN_NAME_CLUSTERCODE);
+        this.areaCode = jsonObject.getString(ListingEntry.COLUMN_NAME_AREACODE);
         this.enumStr = jsonObject.getString(ListingEntry.COLUMN_NAME_ENUMSTR);
         this.hh01 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH01);
         this.hh02 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH02);
@@ -571,7 +561,6 @@ public class ListingContract {
         this.tagId = jsonObject.getString(ListingEntry.COLUMN_TAGID);
         this.isRandom = jsonObject.getString(ListingEntry.COLUMN_RANDOMIZED);
         this.username = jsonObject.getString(ListingEntry.COLUMN_USERNAME);
-
         this.counter = jsonObject.getString(ListingEntry.COLUMN_COUNTER);
 
         return this;
@@ -586,7 +575,7 @@ public class ListingContract {
         public static final String COLUMN_NAME_HHDATETIME = "sysdate";
         public static final String COLUMN_NAME_HHDATETIME01 = "formdate";
         public static final String COLUMN_NAME_ENUMCODE = "enumcode";
-        public static final String COLUMN_NAME_CLUSTERCODE = "clustercode";
+        public static final String COLUMN_NAME_AREACODE = "areacode";
         public static final String COLUMN_NAME_ENUMSTR = "enumstr";
         public static final String COLUMN_NAME_HH01 = "chkconfirm";
         public static final String COLUMN_NAME_HH02 = "hh02";
@@ -609,7 +598,6 @@ public class ListingContract {
         public static final String COLUMN_NAME_HH17 = "hh17";
         public static final String COLUMN_NAME_HH18 = "hh18";
         public static final String COLUMN_NAME_HH19 = "hh19";
-        public static final String COLUMN_NAME_HH20 = "hh20";
         public static final String COLUMN_ISNEWHH = "isnewhh";
         public static final String COLUMN_COUNTER = "counter";
         public static final String COLUMN_NAME_DEVICEID = "deviceid";
@@ -623,7 +611,6 @@ public class ListingContract {
         public static final String COLUMN_SYNCED = "synced";
         public static final String COLUMN_SYNCED_DATE = "synced_date";
         public static final String COLUMN_RANDOMIZED = "tabNo";
-
         public static final String COLUMN_USERNAME = "username";
         public static final String _URL = "sync.php";
     }

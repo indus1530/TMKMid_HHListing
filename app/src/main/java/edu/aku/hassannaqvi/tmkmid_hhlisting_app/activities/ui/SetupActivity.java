@@ -25,10 +25,10 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other.LoginActivity;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other.MainActivity;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.ListingContract;
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.DatabaseHelper;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.ActivitySetupBinding;
 
+import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.appInfo;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.lc;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.userEmail;
 
@@ -138,7 +138,7 @@ public class SetupActivity extends Activity {
         lc.setAppVer(MainApp.versionName + "." + MainApp.versionCode);
         lc.setHhDT(new SimpleDateFormat("dd-MM-yy HH:mm:ss").format(new Date().getTime()));
         lc.setEnumCode(MainApp.enumCode);
-        lc.setClusterCode(MainApp.clusterCode);
+        lc.setAreaCode(MainApp.clusterCode);
         lc.setEnumStr(MainApp.enumStr);
         lc.setHh01(String.valueOf(MainApp.hh01txt));
         lc.setHh02(MainApp.hh02txt);
@@ -197,25 +197,16 @@ public class SetupActivity extends Activity {
     }
 
     private boolean updateDB() {
-        DatabaseHelper db = new DatabaseHelper(this);
-        Log.d(TAG, "UpdateDB: Structure" + lc.getHh03());
-
-        long updcount = db.addForm(lc);
-
-        lc.setID(String.valueOf(updcount));
-
-        if (updcount != 0) {
-
-
-            lc.setUID(
-                    (lc.getDeviceID() + lc.getID()));
-
-            db.updateListingUID();
-
+        long count = appInfo.getDbHelper().addForm(lc);
+        lc.setID(String.valueOf(count));
+        if (count > 0) {
+            lc.setUID((lc.getDeviceID() + lc.getID()));
+            appInfo.getDbHelper().updateListingUID();
+            return true;
         } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sorry. You can't go further.\n Please contact IT Team (Failed to update DB)", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        return true;
     }
 
     public void onBtnAddHHClick() {

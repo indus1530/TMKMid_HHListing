@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.Objects;
 
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.DatabaseHelper;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.ActivityFamilyListingBinding;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.MemberDeathLayoutBinding;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members;
 
+import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.appInfo;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.lc;
 
 public class FamilyListingActivity extends AppCompatActivity {
@@ -78,8 +78,8 @@ public class FamilyListingActivity extends AppCompatActivity {
     public void onTextChangedHH14(CharSequence s, int start, int before, int count) {
         if (Objects.requireNonNull(bi.hh14.getText()).toString().trim().isEmpty()) return;
         bi.hh11.setMaxvalue(Float.parseFloat(bi.hh14.getText().toString()) - 1);
-        bi.hh12.setMaxvalue(Float.parseFloat(bi.hh14.getText().toString()) - 1);
-        bi.hh13.setMaxvalue(Float.parseFloat(bi.hh14.getText().toString()) - 1);
+        bi.hh12.setMaxvalue(Float.parseFloat(bi.hh14.getText().toString()));
+        bi.hh13.setMaxvalue(Float.parseFloat(bi.hh14.getText().toString()));
     }
 
     public void onTextChangedHH18(CharSequence s, int start, int before, int count) {
@@ -139,43 +139,49 @@ public class FamilyListingActivity extends AppCompatActivity {
     }
 
     private boolean formValidation() {
-        return Validator.emptyCheckingContainer(this, bi.fldGrpSecB01);
+        if (!Validator.emptyCheckingContainer(this, bi.fldGrpSecB01)) return false;
+        if (bi.deleteHH.isChecked()) return true;
+
+        int hh11 = bi.hh11.getText().toString().isEmpty() ? 0 : Integer.parseInt(bi.hh11.getText().toString());
+        int hh12 = Integer.parseInt(bi.hh12.getText().toString());
+        int hh13 = Integer.parseInt(bi.hh13.getText().toString());
+
+        if ((hh11 + hh12 + hh13) > Integer.parseInt(bi.hh16.getText().toString()))
+            return Validator.emptyCustomTextBox(this, bi.hh14, "Total not matching!!");
+
+        return true;
     }
 
-    private boolean UpdateDB() {
-        DatabaseHelper db = new DatabaseHelper(this);
-        long updcount = db.addForm(lc);
+    private boolean updateDB() {
+        long updcount = appInfo.getDbHelper().addForm(lc);
         lc.setID(String.valueOf(updcount));
         if (updcount > 0) {
             lc.setUID((lc.getDeviceID() + lc.getID()));
-            db.updateListingUID();
+            appInfo.getDbHelper().updateListingUID();
+            return true;
         } else {
-            Toast.makeText(this, "Updating Database... ERROR!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sorry. You can't go further.\n Please contact IT Team (Failed to update DB)", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        return true;
     }
 
     public void onBtnAddNewHouseHoldClick() {
 
         if (formValidation()) {
-
             try {
                 saveDraft();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (UpdateDB()) {
+            if (updateDB()) {
                 if (familyFlag)
                     MainApp.hh07txt = String.valueOf(Integer.parseInt(MainApp.hh07txt) + 1);
                 else {
-
                     MainApp.hh07txt = String.valueOf(Integer.parseInt(MainApp.hh07txt) + 1);
-
                     familyFlag = true;
                 }
                 lc.setHh07(MainApp.hh07txt);
                 MainApp.fCount++;
-
                 finish();
                 Intent fA = new Intent(this, FamilyListingActivity.class);
                 startActivity(fA);
@@ -192,7 +198,7 @@ public class FamilyListingActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (UpdateDB()) {
+            if (updateDB()) {
                 MainApp.hh07txt = String.valueOf(Integer.parseInt(MainApp.hh07txt) + 1);
                 lc.setHh07(MainApp.hh07txt);
                 MainApp.fCount++;
@@ -214,7 +220,7 @@ public class FamilyListingActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (UpdateDB()) {
+            if (updateDB()) {
                 MainApp.fCount = 0;
                 MainApp.fTotal = 0;
                 MainApp.cCount = 0;

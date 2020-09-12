@@ -80,7 +80,7 @@ public class RandomizationActivity extends MenuActivity {
                                                 new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog, int id) {
 
-                                                        new RandomizationTask(RandomizationActivity.this, lstList.get(position).getClusterCode()).execute();
+                                                        new RandomizationTask(RandomizationActivity.this, lstList.get(position).getAreaCode()).execute();
 
                                                     }
                                                 });

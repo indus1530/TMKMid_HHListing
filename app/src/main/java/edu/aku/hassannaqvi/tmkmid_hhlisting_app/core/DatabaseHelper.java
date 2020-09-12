@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.BLRandomContract.singleRandomHH;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.BLRandomContract.SingleRandomHH;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.ListingContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.ListingContract.ListingEntry;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.SignupContract;
@@ -42,22 +42,23 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.VillageContract.Villag
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    public static final String DB_NAME = DATABASE_NAME.replace(".db", "-copy.db");
     public static final String DATABASE_NAME = "tmkmid-hhl.db";
     public static final String PROJECT_NAME = "tmkmid-hhl-2019";
+    private static final int DATABASE_VERSION = 1;
     // The name of database.
     // Change this when you change the database schema.
-    private static final int DATABASE_VERSION = 1;
-    private static final String SQL_CREATE_BL_RANDOM = "CREATE TABLE " + singleRandomHH.TABLE_NAME + "("
-            + singleRandomHH.COLUMN_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + singleRandomHH.COLUMN_CLUSTER_BLOCK_CODE + " TEXT,"
-            + singleRandomHH.COLUMN_LUID + " TEXT,"
-            + singleRandomHH.COLUMN_STRUCTURE_NO + " TEXT,"
-            + singleRandomHH.COLUMN_FAMILY_EXT_CODE + " TEXT,"
-            + singleRandomHH.COLUMN_HH_HEAD + " TEXT,"
-            + singleRandomHH.COLUMN_CONTACT + " TEXT,"
-            + singleRandomHH.COLUMN_HH_SELECTED_STRUCT + " TEXT,"
-            + singleRandomHH.COLUMN_RANDOMDT + " TEXT );";
-    public static final String DB_NAME = DATABASE_NAME.replace(".db", "-copy.db");
+    private static final String SQL_CREATE_BL_RANDOM = "CREATE TABLE " + SingleRandomHH.TABLE_NAME + "("
+            + SingleRandomHH.COLUMN_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + SingleRandomHH.COLUMN_CLUSTER_BLOCK_CODE + " TEXT,"
+            + SingleRandomHH.COLUMN_LUID + " TEXT,"
+            + SingleRandomHH.COLUMN_STRUCTURE_NO + " TEXT,"
+            + SingleRandomHH.COLUMN_FAMILY_EXT_CODE + " TEXT,"
+            + SingleRandomHH.COLUMN_HH_HEAD + " TEXT,"
+            + SingleRandomHH.COLUMN_CONTACT + " TEXT,"
+            + SingleRandomHH.COLUMN_HH_SELECTED_STRUCT + " TEXT,"
+            + SingleRandomHH.COLUMN_RANDOMDT + " TEXT );";
+    private static String TAG = DatabaseHelper.class.getName();
     private static final String SQL_CREATE_SIGNUP = "CREATE TABLE " + SignUpTable.TABLE_NAME + "("
             + SignUpTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + SignUpTable.FULLNAME + " TEXT,"
@@ -70,14 +71,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + SignUpTable.COLUMN_SYNCED + " TEXT, "
             + SignUpTable.COLUMN_SYNCED_DATE + " TEXT " +
             ");";
-    private static String TAG = "DatabaseHelper";
     final String SQL_CREATE_LISTING_TABLE = "CREATE TABLE " + ListingEntry.TABLE_NAME + " (" +
             ListingEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             ListingEntry.COLUMN_NAME_UID + " TEXT, " +
             ListingEntry.COLUMN_NAME_HHDATETIME + " TEXT, " +
             ListingEntry.COLUMN_NAME_HHDATETIME01 + " TEXT, " +
             ListingEntry.COLUMN_NAME_ENUMCODE + " TEXT, " +
-            ListingEntry.COLUMN_NAME_CLUSTERCODE + " TEXT, " +
+            ListingEntry.COLUMN_NAME_AREACODE + " TEXT, " +
             ListingEntry.COLUMN_NAME_ENUMSTR + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH01 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH02 + " TEXT, " +
@@ -129,7 +129,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SingleVertices.COLUMN_POLY_LAT + " TEXT, " +
             SingleVertices.COLUMN_POLY_LANG + " TEXT, " +
             SingleVertices.COLUMN_POLY_SEQ + " TEXT );";
-    final String SQL_COUNT_LISTINGS = "SELECT count(*) as ttlisting from " + ListingEntry.TABLE_NAME;
     final String SQL_CREATE_VERSIONAPP = "CREATE TABLE " + VersionAppTable.TABLE_NAME + " (" +
             VersionAppTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             VersionAppTable.COLUMN_VERSION_CODE + " TEXT, " +
@@ -145,6 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + UCTable.COLUMN_UC_CODE + " TEXT,"
             + UCTable.COLUMN_UC_NAME + " TEXT,"
             + UCTable.COLUMN_TALUKA_CODE + " TEXT );";
+    final String SQL_COUNT_LISTINGS = "SELECT count(*) as ttlisting from " + ListingEntry.TABLE_NAME;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -232,7 +232,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(ListingEntry.COLUMN_NAME_HHDATETIME, lc.getHhDT());
 
         values.put(ListingEntry.COLUMN_NAME_ENUMCODE, lc.getEnumCode());
-        values.put(ListingEntry.COLUMN_NAME_CLUSTERCODE, lc.getClusterCode());
+        values.put(ListingEntry.COLUMN_NAME_AREACODE, lc.getAreaCode());
         values.put(ListingEntry.COLUMN_NAME_ENUMSTR, lc.getEnumStr());
 
         values.put(ListingEntry.COLUMN_NAME_HH01, lc.getHh01());
@@ -244,7 +244,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         values.put(ListingEntry.COLUMN_NAME_HH04, lc.getHh04());
         values.put(ListingEntry.COLUMN_NAME_HH19, lc.getHh19());
-        values.put(ListingEntry.COLUMN_NAME_HH20, lc.getHh20());
         values.put(ListingEntry.COLUMN_NAME_HH05, lc.getHh05());
         values.put(ListingEntry.COLUMN_NAME_HH06, lc.getHh06());
         values.put(ListingEntry.COLUMN_NAME_HH07, lc.getHh07());
@@ -290,19 +289,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(singleRandomHH.COLUMN_LUID, lc.getUID());
-        values.put(singleRandomHH.COLUMN_RANDOMDT, lc.getHhDT());
-        values.put(singleRandomHH.COLUMN_CLUSTER_BLOCK_CODE, lc.getClusterCode());
-        values.put(singleRandomHH.COLUMN_STRUCTURE_NO, lc.getHh03());
-        values.put(singleRandomHH.COLUMN_FAMILY_EXT_CODE, lc.getHh07());
-        values.put(singleRandomHH.COLUMN_HH_HEAD, lc.getHh08());
-        values.put(singleRandomHH.COLUMN_CONTACT, lc.getHh09());
+        values.put(SingleRandomHH.COLUMN_LUID, lc.getUID());
+        values.put(SingleRandomHH.COLUMN_RANDOMDT, lc.getHhDT());
+        values.put(SingleRandomHH.COLUMN_CLUSTER_BLOCK_CODE, lc.getAreaCode());
+        values.put(SingleRandomHH.COLUMN_STRUCTURE_NO, lc.getHh03());
+        values.put(SingleRandomHH.COLUMN_FAMILY_EXT_CODE, lc.getHh07());
+        values.put(SingleRandomHH.COLUMN_HH_HEAD, lc.getHh08());
+        values.put(SingleRandomHH.COLUMN_CONTACT, lc.getHh09());
 
-        values.put(singleRandomHH.COLUMN_HH_SELECTED_STRUCT, lc.getHh10().equals("1") ? "1" : "2");
+        values.put(SingleRandomHH.COLUMN_HH_SELECTED_STRUCT, lc.getHh10().equals("1") ? "1" : "2");
 
         long newRowId;
         newRowId = db.insert(
-                singleRandomHH.TABLE_NAME,
+                SingleRandomHH.TABLE_NAME,
                 null,
                 values);
 
@@ -336,7 +335,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(ListingEntry.COLUMN_RANDOMIZED, "1");
 
 // Which row to update, based on the title
-        String where = ListingEntry.COLUMN_NAME_CLUSTERCODE + " = ?";
+        String where = ListingEntry.COLUMN_NAME_AREACODE + " = ?";
         String[] whereArgs = {Clustercode};
 
         int count = db.update(
@@ -369,7 +368,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_UID,
                 ListingEntry.COLUMN_NAME_HHDATETIME,
                 ListingEntry.COLUMN_NAME_ENUMCODE,
-                ListingEntry.COLUMN_NAME_CLUSTERCODE,
+                ListingEntry.COLUMN_NAME_AREACODE,
                 ListingEntry.COLUMN_NAME_ENUMSTR,
                 ListingEntry.COLUMN_NAME_HH01,
                 ListingEntry.COLUMN_NAME_HH02,
@@ -412,7 +411,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String having = null;
 
         String orderBy =
-                ListingEntry.COLUMN_NAME_CLUSTERCODE + " ASC";
+                ListingEntry.COLUMN_NAME_AREACODE + " ASC";
 
         Collection<ListingContract> allLC = new ArrayList<>();
         JSONArray jsonArray = new JSONArray();
@@ -455,7 +454,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_HHDATETIME,
                 ListingEntry.COLUMN_NAME_HHDATETIME01,
                 ListingEntry.COLUMN_NAME_ENUMCODE,
-                ListingEntry.COLUMN_NAME_CLUSTERCODE,
+                ListingEntry.COLUMN_NAME_AREACODE,
                 ListingEntry.COLUMN_NAME_ENUMSTR,
                 ListingEntry.COLUMN_NAME_HH01,
                 ListingEntry.COLUMN_NAME_HH02,
@@ -498,7 +497,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String groupBy = null;
         String having = null;
 
-        String orderBy = ListingEntry.COLUMN_NAME_CLUSTERCODE + " ASC";
+        String orderBy = ListingEntry.COLUMN_NAME_AREACODE + " ASC";
 
         Collection<ListingContract> allLC = new ArrayList<ListingContract>();
         try {
@@ -579,7 +578,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_UID,
                 ListingEntry.COLUMN_NAME_HHDATETIME,
                 ListingEntry.COLUMN_NAME_ENUMCODE,
-                ListingEntry.COLUMN_NAME_CLUSTERCODE,
+                ListingEntry.COLUMN_NAME_AREACODE,
                 ListingEntry.COLUMN_NAME_ENUMSTR,
                 ListingEntry.COLUMN_NAME_HH01,
                 ListingEntry.COLUMN_NAME_HH02,
@@ -622,10 +621,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String whereClause = ListingEntry.COLUMN_NAME_HH08A1 + " =?";
         String[] whereArgs = {"1"};
-        String groupBy = ListingEntry.COLUMN_NAME_CLUSTERCODE;
+        String groupBy = ListingEntry.COLUMN_NAME_AREACODE;
         String having = null;
 
-        String orderBy = ListingEntry.COLUMN_NAME_CLUSTERCODE + " ASC";
+        String orderBy = ListingEntry.COLUMN_NAME_AREACODE + " ASC";
 
         Collection<ListingContract> allLC = new ArrayList<>();
         try {
@@ -664,7 +663,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_UID,
                 ListingEntry.COLUMN_NAME_HHDATETIME,
                 ListingEntry.COLUMN_NAME_ENUMCODE,
-                ListingEntry.COLUMN_NAME_CLUSTERCODE,
+                ListingEntry.COLUMN_NAME_AREACODE,
                 ListingEntry.COLUMN_NAME_ENUMSTR,
                 ListingEntry.COLUMN_NAME_HH01,
                 ListingEntry.COLUMN_NAME_HH02,
@@ -701,13 +700,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_RANDOMIZED
         };
 
-        String whereClause = ListingEntry.COLUMN_NAME_CLUSTERCODE + " = ?";
+        String whereClause = ListingEntry.COLUMN_NAME_AREACODE + " = ?";
         String[] whereArgs = {cluster};
         String groupBy = null;
         String having = null;
 
         String orderBy =
-                ListingEntry.COLUMN_NAME_CLUSTERCODE + " ASC";
+                ListingEntry.COLUMN_NAME_AREACODE + " ASC";
         JSONArray jsonArray = new JSONArray();
 
         Collection<ListingContract> allLC = new ArrayList<ListingContract>();
@@ -753,7 +752,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_UID,
                 ListingEntry.COLUMN_NAME_HHDATETIME,
                 ListingEntry.COLUMN_NAME_ENUMCODE,
-                ListingEntry.COLUMN_NAME_CLUSTERCODE,
+                ListingEntry.COLUMN_NAME_AREACODE,
                 ListingEntry.COLUMN_NAME_ENUMSTR,
                 ListingEntry.COLUMN_NAME_HH01,
                 ListingEntry.COLUMN_NAME_HH02,
@@ -791,7 +790,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         };
 
         String whereClause = ListingEntry.COLUMN_NAME_HH08A1 + " =? AND "
-                + ListingEntry.COLUMN_NAME_CLUSTERCODE + " =? AND "
+                + ListingEntry.COLUMN_NAME_AREACODE + " =? AND "
                 + ListingEntry.COLUMN_RANDOMIZED + " =?";
         String[] whereArgs = {"1", clusterCode, "2"};
         String groupBy = null;
@@ -1312,6 +1311,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return allEB;
     }
+
 
     //Get All UC
     public List<UCContract> getUCs() {
