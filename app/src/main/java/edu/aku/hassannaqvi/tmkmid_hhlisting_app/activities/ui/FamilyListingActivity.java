@@ -146,7 +146,7 @@ public class FamilyListingActivity extends AppCompatActivity {
         int hh12 = Integer.parseInt(bi.hh12.getText().toString());
         int hh13 = Integer.parseInt(bi.hh13.getText().toString());
 
-        if ((hh11 + hh12 + hh13) > Integer.parseInt(bi.hh16.getText().toString()))
+        if ((hh11 + hh12 + hh13) > Integer.parseInt(bi.hh14.getText().toString()))
             return Validator.emptyCustomTextBox(this, bi.hh14, "Total not matching!!");
 
         return true;
