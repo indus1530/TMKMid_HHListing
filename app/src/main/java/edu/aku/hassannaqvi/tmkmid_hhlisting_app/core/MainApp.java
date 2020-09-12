@@ -31,12 +31,12 @@ public class MainApp extends Application {
     // GPS Related Field Variables
     public static final String _IP = "http://f38158";// .TEST server
     //    public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
-    public static final String _HOST_URL = MainApp._IP + "/tmk/api/";
+    public static final String _HOST_URL = MainApp._IP + "/tmk_el/api/";
     public static final String _SERVER_GET_URL = "getData.php";
     private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
     private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
     private static final int TWO_MINUTES = 1000 * 60 * 2;
-    public static String _UPDATE_URL = MainApp._IP + "/tmk/app/listings/";
+    public static String _UPDATE_URL = MainApp._IP + "/tmk_el/app/listings/";
     public static String DeviceURL = "devices.php";
     public static AppInfo appInfo;
 
