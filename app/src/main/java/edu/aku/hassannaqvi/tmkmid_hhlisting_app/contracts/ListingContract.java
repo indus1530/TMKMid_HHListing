@@ -434,7 +434,6 @@ public class ListingContract {
         json.put(ListingEntry.COLUMN_NAME_HH02, this.hh02);
         json.put(ListingEntry.COLUMN_NAME_HH03, this.hh03);
         json.put(ListingEntry.COLUMN_NAME_HH04, this.hh04);
-        json.put(ListingEntry.COLUMN_NAME_HH19, this.hh19);
         json.put(ListingEntry.COLUMN_NAME_HH05, this.hh05);
         json.put(ListingEntry.COLUMN_NAME_HH06, this.hh06);
         json.put(ListingEntry.COLUMN_NAME_HH07, this.hh07);
@@ -465,6 +464,8 @@ public class ListingContract {
         if (!this.counter.equals("")) {
             json.put(ListingEntry.COLUMN_COUNTER, new JSONObject(this.counter));
         }
+        if (this.hh19 != null && !this.hh19.equals("null"))
+            json.put(ListingEntry.COLUMN_NAME_HH19, new JSONObject(this.hh19));
 
         return json;
     }
