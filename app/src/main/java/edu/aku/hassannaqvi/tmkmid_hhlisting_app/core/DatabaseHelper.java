@@ -42,9 +42,9 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.VillageContract.Villag
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = DATABASE_NAME.replace(".db", "-copy.db");
     public static final String DATABASE_NAME = "tmkmid-hhl.db";
     public static final String PROJECT_NAME = "tmkmid-hhl-2019";
+    public static final String DB_NAME = DATABASE_NAME.replace(".db", "-copy.db");
     private static final int DATABASE_VERSION = 1;
     // The name of database.
     // Change this when you change the database schema.
