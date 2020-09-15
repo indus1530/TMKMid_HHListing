@@ -54,7 +54,7 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_setup);
         bi.setCallback(this);
-
+        MainApp.hh07txt = "1";
         if (MainApp.hh02txt == null) {
             MainApp.hh03txt = 1;
         } else {

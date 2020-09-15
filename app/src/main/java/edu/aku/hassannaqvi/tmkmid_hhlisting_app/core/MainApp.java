@@ -48,7 +48,7 @@ public class MainApp extends Application {
     public static int hh01txt;
     public static String hh02txt;
     public static int hh03txt = 0;
-    public static String hh07txt = "1";
+    public static String hh07txt;
     public static int fCount = 0;
     public static int fTotal = 0;
     public static int cCount = 0;

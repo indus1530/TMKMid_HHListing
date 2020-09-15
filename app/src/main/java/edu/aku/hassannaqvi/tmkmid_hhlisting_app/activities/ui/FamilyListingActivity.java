@@ -63,7 +63,8 @@ public class FamilyListingActivity extends AppCompatActivity {
                     }
                 }
             }
-            Members.txtTeamNoWithFam.set("S" + String.format("%04d", MainApp.hh03txt) + "-H" + String.format("%03d", Integer.valueOf(MainApp.hh07txt)));
+            Members.txtTeamNoWithFam.set("S" + String.format(Locale.getDefault(), "%04d", MainApp.hh03txt)
+                    + "-H" + String.format(Locale.getDefault(), "%03d", Integer.valueOf(MainApp.hh07txt)));
         });
 
         bi.deleteHH.setOnCheckedChangeListener((compoundButton, b) -> {
