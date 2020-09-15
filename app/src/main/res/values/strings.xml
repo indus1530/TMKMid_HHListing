@@ -31,11 +31,11 @@
     <string name="hh1901a">مرد</string>
     <string name="hh1901b">عورت</string>
     <string name="hh1902">وفات ڪرڻ وقت ان جي عمر؟</string>
-    <string name="hh1902dd">Day</string>
-    <string name="hh1902mm">Month</string>
-    <string name="hh1902yy">Year</string>
-    <string name="hh20">ڇا توهان جي گھر ۾ گذريل پنجن سالن جي دوران زنده ٻار جي پيدائش ٿئي آهي؟ </string>
-    <string name="hh21">اگر ها ته گذريل پنجن سالن دوران ڪيترن ٻارن جي زنده پيدائش ٿئي؟</string>
+    <string name="hh1902dd">ڏينھن</string>
+    <string name="hh1902mm">مھينا</string>
+    <string name="hh1902yy">سال</string>
+    <string name="hh20">ڇا توھان جي گھر ۾ گذريل پنجن سالن ۾ ڪنھن زندھ ٻار جي پئدائش ٿي؟</string>
+    <string name="hh21">جيڪڏھن ھا ته ڪيترا زندھ ٻار پيدا ٿيا؟</string>
     <string name="hhIsNewFam">ڇا ھن عمارت ۾ ڪو ٻيو / وڌيڪ خاندان رھي ٿو؟</string>
     <string name="hh14">ڇا اها جڳهه رهائشي مقصدن لاءِ استعمال ڪئي پئي وڃي؟ </string>
     <string name="na101a"> ضلعہ </string>
