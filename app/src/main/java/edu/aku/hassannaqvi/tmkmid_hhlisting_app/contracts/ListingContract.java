@@ -39,6 +39,8 @@ public class ListingContract {
     private String hh17;
     private String hh18;
     private String hh19;
+    private String hh20;
+    private String hh21;
     private String isNewHH;
     private String counter;
     private String DeviceID;
@@ -69,6 +71,22 @@ public class ListingContract {
 
     public void setHh19(String hh19) {
         this.hh19 = hh19;
+    }
+
+    public String getHh20() {
+        return hh20;
+    }
+
+    public void setHh20(String hh20) {
+        this.hh20 = hh20;
+    }
+
+    public String getHh21() {
+        return hh21;
+    }
+
+    public void setHh21(String hh21) {
+        this.hh21 = hh21;
     }
 
     public String getTotalhh() {
@@ -450,6 +468,8 @@ public class ListingContract {
         json.put(ListingEntry.COLUMN_NAME_HH15, this.hh15);
         json.put(ListingEntry.COLUMN_NAME_HH16, this.hh16);
         json.put(ListingEntry.COLUMN_NAME_HH17, this.hh17);
+        json.put(ListingEntry.COLUMN_NAME_HH20, this.hh20);
+        json.put(ListingEntry.COLUMN_NAME_HH21, this.hh21);
         json.put(ListingEntry.COLUMN_NAME_DEVICEID, this.DeviceID);
         json.put(ListingEntry.COLUMN_NAME_GPSLat, this.GPSLat);
         json.put(ListingEntry.COLUMN_NAME_GPSLng, this.GPSLng);
@@ -499,6 +519,8 @@ public class ListingContract {
         lc.setHh17(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH17))));
         lc.setHh18(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH18))));
         lc.setHh19(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH19))));
+        lc.setHh20(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH20))));
+        lc.setHh21(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_HH21))));
         lc.setDeviceID(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_DEVICEID))));
         lc.setGPSLat(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLat))));
         lc.setGPSLng(String.valueOf(c.getString(c.getColumnIndex(ListingEntry.COLUMN_NAME_GPSLng))));
@@ -551,6 +573,8 @@ public class ListingContract {
         this.hh15 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH15);
         this.hh16 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH16);
         this.hh17 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH17);
+        this.hh20 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH20);
+        this.hh21 = jsonObject.getString(ListingEntry.COLUMN_NAME_HH21);
         this.isNewHH = jsonObject.getString(ListingEntry.COLUMN_ISNEWHH);
         this.DeviceID = jsonObject.getString(ListingEntry.COLUMN_NAME_DEVICEID);
         this.GPSLat = jsonObject.getString(ListingEntry.COLUMN_NAME_GPSLat);
@@ -599,6 +623,8 @@ public class ListingContract {
         public static final String COLUMN_NAME_HH17 = "hh17";
         public static final String COLUMN_NAME_HH18 = "hh18";
         public static final String COLUMN_NAME_HH19 = "hh19";
+        public static final String COLUMN_NAME_HH20 = "hh20";
+        public static final String COLUMN_NAME_HH21 = "hh21";
         public static final String COLUMN_ISNEWHH = "isnewhh";
         public static final String COLUMN_COUNTER = "counter";
         public static final String COLUMN_NAME_DEVICEID = "deviceid";

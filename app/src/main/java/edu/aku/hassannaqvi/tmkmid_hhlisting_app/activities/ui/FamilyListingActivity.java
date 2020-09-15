@@ -74,6 +74,18 @@ public class FamilyListingActivity extends AppCompatActivity {
             }
         });
 
+        bi.hh17.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == bi.hh17b.getId()) {
+                Clear.clearAllFields(bi.hh18cv);
+            }
+        });
+
+        bi.hh20.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == bi.hh20b.getId()) {
+                Clear.clearAllFields(bi.hh21cv);
+            }
+        });
+
     }
 
     public void onTextChangedHH14(CharSequence s, int start, int before, int count) {
@@ -140,8 +152,8 @@ public class FamilyListingActivity extends AppCompatActivity {
             counter19++;
         }
 
-        /*SF.put("hh20", );
-        SF.put("hh21", );*/
+        SF.put("hh20", bi.hh20a.isChecked() ? "1" : bi.hh20b.isChecked() ? "2" : "-1");
+        SF.put("hh21", bi.hh21.getText().toString().isEmpty() ? "-1" : bi.hh21.getText().toString());
 
         lc.setHh19(String.valueOf(SF));
     }

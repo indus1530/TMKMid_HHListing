@@ -67,7 +67,6 @@
                 android:id="@+id/fldGrpSecB01"
                 style="@style/vlinearlayout">
 
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh08cv"
                     style="@style/cardView">
@@ -282,6 +281,65 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <!--hh20-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/hh20cv"
+                    style="@style/cardView">
+
+                    <LinearLayout style="@style/vlinearlayout">
+
+                        <TextView
+                            style="@style/i_textview"
+                            android:text="@string/hh20" />
+
+                        <RadioGroup
+                            android:id="@+id/hh20"
+                            style="@style/hradiogroup">
+
+                            <RadioButton
+                                android:id="@+id/hh20a"
+                                style="@style/radiobutton"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="@string/yes" />
+
+                            <RadioButton
+                                android:id="@+id/hh20b"
+                                style="@style/radiobutton"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:text="@string/no" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!--hh21-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/hh21cv"
+                    style="@style/cardView"
+                    android:visibility="@{hh20b.checked ? View.GONE : View.VISIBLE}">
+
+                    <LinearLayout style="@style/vlinearlayout">
+
+                        <TextView
+                            style="@style/i_textview"
+                            android:text="@string/hh21" />
+
+                        <com.edittextpicker.aliazaz.EditTextPicker
+                            android:id="@+id/hh21"
+                            style="@style/EditTextNum"
+                            android:hint="@string/hh10a"
+                            android:maxLength="2"
+                            app:maxValue="99"
+                            app:minValue="1"
+                            app:type="range" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <!--hh17-->
                 <androidx.cardview.widget.CardView

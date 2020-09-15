@@ -100,6 +100,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ListingEntry.COLUMN_NAME_HH15 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH16 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH17 + " TEXT, " +
+            ListingEntry.COLUMN_NAME_HH20 + " TEXT, " +
+            ListingEntry.COLUMN_NAME_HH21 + " TEXT, " +
             ListingEntry.COLUMN_ISNEWHH + " TEXT, " +
             ListingEntry.COLUMN_COUNTER + " TEXT, " +
             ListingEntry.COLUMN_USERNAME + " TEXT, " +
@@ -261,6 +263,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(ListingEntry.COLUMN_NAME_HH16, lc.getHh16());
         values.put(ListingEntry.COLUMN_ISNEWHH, lc.getIsNewHH());
         values.put(ListingEntry.COLUMN_NAME_HH17, lc.getHh17());
+        values.put(ListingEntry.COLUMN_NAME_HH20, lc.getHh20());
+        values.put(ListingEntry.COLUMN_NAME_HH21, lc.getHh21());
         values.put(ListingEntry.COLUMN_COUNTER, lc.getCounter());
         values.put(ListingEntry.COLUMN_NAME_DEVICEID, lc.getDeviceID());
         values.put(ListingEntry.COLUMN_USERNAME, lc.getUsername());
@@ -391,6 +395,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_HH15,
                 ListingEntry.COLUMN_NAME_HH16,
                 ListingEntry.COLUMN_NAME_HH17,
+                ListingEntry.COLUMN_NAME_HH20,
+                ListingEntry.COLUMN_NAME_HH21,
                 ListingEntry.COLUMN_ISNEWHH,
                 ListingEntry.COLUMN_COUNTER,
                 ListingEntry.COLUMN_USERNAME,
@@ -477,6 +483,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_HH15,
                 ListingEntry.COLUMN_NAME_HH16,
                 ListingEntry.COLUMN_NAME_HH17,
+                ListingEntry.COLUMN_NAME_HH20,
+                ListingEntry.COLUMN_NAME_HH21,
                 ListingEntry.COLUMN_ISNEWHH,
                 ListingEntry.COLUMN_COUNTER,
                 ListingEntry.COLUMN_USERNAME,
@@ -601,6 +609,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_HH15,
                 ListingEntry.COLUMN_NAME_HH16,
                 ListingEntry.COLUMN_NAME_HH17,
+                ListingEntry.COLUMN_NAME_HH20,
+                ListingEntry.COLUMN_NAME_HH21,
                 ListingEntry.COLUMN_ISNEWHH,
                 ListingEntry.COLUMN_COUNTER,
                 ListingEntry.COLUMN_USERNAME,
@@ -686,6 +696,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_HH15,
                 ListingEntry.COLUMN_NAME_HH16,
                 ListingEntry.COLUMN_NAME_HH17,
+                ListingEntry.COLUMN_NAME_HH20,
+                ListingEntry.COLUMN_NAME_HH21,
                 ListingEntry.COLUMN_ISNEWHH,
                 ListingEntry.COLUMN_COUNTER,
                 ListingEntry.COLUMN_USERNAME,
@@ -775,6 +787,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ListingEntry.COLUMN_NAME_HH15,
                 ListingEntry.COLUMN_NAME_HH16,
                 ListingEntry.COLUMN_NAME_HH17,
+                ListingEntry.COLUMN_NAME_HH20,
+                ListingEntry.COLUMN_NAME_HH21,
                 ListingEntry.COLUMN_ISNEWHH,
                 ListingEntry.COLUMN_COUNTER,
                 ListingEntry.COLUMN_USERNAME,
