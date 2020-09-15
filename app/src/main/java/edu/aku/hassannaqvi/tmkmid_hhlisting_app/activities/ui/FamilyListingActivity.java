@@ -131,10 +131,16 @@ public class FamilyListingActivity extends AppCompatActivity {
         for (View view : hh19MainList) {
             MemberDeathLayoutBinding hh19Binding = DataBindingUtil.bind(view);
             SF.put(String.format("hh19%02d" + "g", counter19), hh19Binding.hh19.getText().toString());
-            SF.put(String.format("hh19%02d" + "a", counter19), hh19Binding.hh20.getText().toString());
+            SF.put(String.format("hh19%02d" + "dd", counter19), hh19Binding.hh20.getText().toString());
+            SF.put(String.format("hh19%02d" + "mm", counter19), hh19Binding.hh20.getText().toString());
+            SF.put(String.format("hh19%02d" + "yy", counter19), hh19Binding.hh20.getText().toString());
 
             counter19++;
         }
+
+        /*SF.put("hh20", );
+        SF.put("hh21", );*/
+
         lc.setHh19(String.valueOf(SF));
     }
 

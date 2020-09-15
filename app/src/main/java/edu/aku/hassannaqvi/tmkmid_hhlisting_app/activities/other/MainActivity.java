@@ -53,6 +53,7 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.AndroidDatabaseManager;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.AndroidUtilityKt;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.ActivityMainBinding;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.WarningActivityInterface;
 import io.reactivex.Observable;
@@ -271,7 +272,7 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
                     MainApp.hh02txt = bi.txtPSU.getText().toString();
                     MainApp.enumCode = villageContract.getVillage_code();
                     MainApp.enumStr = villageContract.getVillage_name();
-                    MainApp.clusterCode = bi.txtPSU.getText().toString();
+                    Members.txtClusterCode.set(bi.txtPSU.getText().toString());
                 }
             } else {
                 Toast.makeText(this, "Sorry not found any block", Toast.LENGTH_SHORT).show();

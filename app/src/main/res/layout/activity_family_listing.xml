@@ -251,8 +251,8 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            app:maxValue="25"
-                            app:minValue="1"
+                            app:maxValue="99"
+                            app:minValue="0"
                             app:type="range" />
 
                     </LinearLayout>
@@ -274,14 +274,16 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            app:maxValue="25"
-                            app:minValue="1"
+                            app:maxValue="99"
+                            app:minValue="0"
                             app:type="range" />
 
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
+
+                <!--hh17-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh17cv"
                     style="@style/cardView">
@@ -332,8 +334,8 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            android:text='@{hh17a.checked ? hh18.getText().toString() : ""}'
                             android:onTextChanged="@{callback.onTextChangedHH18}"
+                            android:text='@{hh17a.checked ? hh18.getText().toString() : ""}'
                             app:maxValue="10"
                             app:minValue="1"
                             app:type="range" />
@@ -341,7 +343,6 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
-
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh19cv"

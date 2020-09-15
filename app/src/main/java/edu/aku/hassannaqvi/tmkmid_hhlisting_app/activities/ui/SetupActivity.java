@@ -1,10 +1,8 @@
 package edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.format.DateFormat;
@@ -12,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.validatorcrawler.aliazaz.Clear;
@@ -19,6 +18,7 @@ import com.validatorcrawler.aliazaz.Validator;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
@@ -27,13 +27,14 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other.MainActivity;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.ListingContract;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.ActivitySetupBinding;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members;
 
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.appInfo;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.lc;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.userEmail;
 
-public class SetupActivity extends Activity {
-    private static final String TAG = "Setup Activity";
+public class SetupActivity extends AppCompatActivity {
+    private static final String TAG = SetupActivity.class.getName();
     private ActivitySetupBinding bi;
 
     @Override
@@ -54,52 +55,38 @@ public class SetupActivity extends Activity {
         bi = DataBindingUtil.setContentView(this, R.layout.activity_setup);
         bi.setCallback(this);
 
-        bi.hh02.setText(MainApp.clusterCode);
-        bi.hh02.setEnabled(false);
-
         if (MainApp.hh02txt == null) {
             MainApp.hh03txt = 1;
         } else {
             MainApp.hh03txt++;
-            bi.hh02.setText(MainApp.clusterCode);
-            bi.hh02.setEnabled(false);
         }
-        MainApp.hh07txt = "1";
-        String StructureNumber = String.format("%04d", MainApp.hh03txt);
-        bi.hh03.setTextColor(Color.RED);
-        bi.hh03.setText(StructureNumber);
-        bi.hh07.setText(new StringBuilder(getString(R.string.hh07)).append(":").append(MainApp.hh07txt));
+        Members.txtStructureNo.set(String.format(Locale.getDefault(), "%04d", MainApp.hh03txt));
 
         bi.hh04.setOnCheckedChangeListener((group, checkedId) -> {
-
-            if (bi.hh04a.isChecked()) {
-                //Moved to Add next Family button: MainApp.hh07txt = String.valueOf((char) MainApp.hh07txt.charAt(0) + 1);
-                MainApp.hh07txt = "1";
-            } else {
-                MainApp.hh07txt = "";
-            }
-
-            if (bi.hh04h.isChecked() || bi.hh04i.isChecked()) {
+            if (checkedId == bi.hh04h.getId() || checkedId == bi.hh04i.getId()) {
                 Clear.clearAllFields(bi.fldGrpHH12);
                 bi.fldGrpHH12.setVisibility(View.GONE);
                 bi.btnNextStructure.setVisibility(View.GONE);
                 bi.btnChangePSU.setVisibility(View.VISIBLE);
-                if (bi.hh04h.isChecked()) {
+                if (bi.hh04h.isChecked())
                     bi.btnChangePSU.setText(R.string.logout);
-                } else {
+                else
                     bi.btnChangePSU.setText(R.string.change_enumeration_block);
-                }
-            } else {
+            } else if (checkedId == bi.hh04a.getId()) {
                 bi.fldGrpHH12.setVisibility(View.VISIBLE);
                 bi.btnChangePSU.setVisibility(View.GONE);
+                bi.fldGrpHH04.setVisibility(View.VISIBLE);
+                bi.btnNextStructure.setVisibility(View.GONE);
+            } else {
+                Clear.clearAllFields(bi.fldGrpHH12);
+                bi.fldGrpHH12.setVisibility(View.GONE);
+                bi.hh05.setChecked(false);
+                bi.btnChangePSU.setVisibility(View.GONE);
+                bi.btnNextStructure.setVisibility(View.VISIBLE);
             }
         });
 
         bi.hh14.setOnCheckedChangeListener((group, checkedId) -> {
-
-            MainApp.hh07txt = "1";
-
-            bi.hh07.setText(new StringBuilder(getString(R.string.hh07)).append(":").append(MainApp.hh07txt));
             if (bi.hh14a.isChecked()) {
                 bi.fldGrpHH04.setVisibility(View.VISIBLE);
                 bi.btnNextStructure.setVisibility(View.GONE);
@@ -114,14 +101,9 @@ public class SetupActivity extends Activity {
 
         bi.hh05.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                MainApp.hh07txt = "1";
-                bi.hh07.setText(String.format("%s: %s", getString(R.string.hh07), MainApp.hh07txt));
                 bi.hh06.setVisibility(View.VISIBLE);
                 bi.hh06.requestFocus();
-
             } else {
-                MainApp.hh07txt = "1";
-                bi.hh07.setText(String.format("%s: %s", getString(R.string.hh07), MainApp.hh07txt));
                 bi.hh06.setVisibility(View.GONE);
                 bi.hh06.setText(null);
             }
@@ -130,7 +112,7 @@ public class SetupActivity extends Activity {
 
     }
 
-    private void SaveDraft() {
+    private void saveDraft() {
 
         lc = new ListingContract();
         SharedPreferences sharedPref = getSharedPreferences("tagName", MODE_PRIVATE);
@@ -138,7 +120,7 @@ public class SetupActivity extends Activity {
         lc.setAppVer(MainApp.versionName + "." + MainApp.versionCode);
         lc.setHhDT(new SimpleDateFormat("dd-MM-yy HH:mm:ss").format(new Date().getTime()));
         lc.setEnumCode(MainApp.enumCode);
-        lc.setAreaCode(MainApp.clusterCode);
+        lc.setAreaCode(bi.hh02.getText().toString());
         lc.setEnumStr(MainApp.enumStr);
         lc.setHh01(String.valueOf(MainApp.hh01txt));
         lc.setHh02(MainApp.hh02txt);
@@ -158,11 +140,10 @@ public class SetupActivity extends Activity {
         lc.setHh06(Objects.requireNonNull(bi.hh06.getText()).toString());
         lc.setHh07(MainApp.hh07txt);
         lc.setHh09a1(bi.hh04a.isChecked() ? "1" : "2");
-        lc.setDeviceID(Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID));
+        lc.setDeviceID(Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID));
         lc.setHh08a1(bi.hh14a.isChecked() ? "1" : bi.hh14b.isChecked() ? "2" : "0");
         setGPS();
         MainApp.fTotal = bi.hh06.getText().toString().isEmpty() ? 0 : Integer.parseInt(bi.hh06.getText().toString());
-        Log.d(TAG, "SaveDraft: " + lc.getHh03());
     }
 
     private void setGPS() {
@@ -209,13 +190,14 @@ public class SetupActivity extends Activity {
         }
     }
 
-    public void onBtnAddHHClick() {
+
+    public void onBtnAddHHClick(View v) {
 
         if (MainApp.hh02txt == null) {
             MainApp.hh02txt = bi.hh02.getText().toString();
         }
         if (formValidation()) {
-            SaveDraft();
+            saveDraft();
             MainApp.fCount++;
             finish();
             Intent fA = new Intent(this, FamilyListingActivity.class);
@@ -224,7 +206,7 @@ public class SetupActivity extends Activity {
 
     }
 
-    public void onBtnChangePSUClick() {
+    public void onBtnChangePSUClick(View v) {
 
         finish();
 
@@ -232,7 +214,7 @@ public class SetupActivity extends Activity {
         if (bi.hh04h.isChecked()) {
             startActivity(new Intent(this, LoginActivity.class));
         } else {
-            SaveDraft();
+            saveDraft();
 
             if (updateDB()) {
                 MainApp.hh02txt = null;
@@ -244,13 +226,13 @@ public class SetupActivity extends Activity {
 
     }
 
-    public void onBtnNextStructureClick() {
+    public void onBtnNextStructureClick(View v) {
         if (MainApp.hh02txt == null) {
             MainApp.hh02txt = bi.hh02.getText().toString();
         }
         if (formValidation()) {
 
-            SaveDraft();
+            saveDraft();
             if (updateDB()) {
                 MainApp.fCount = 0;
                 MainApp.fTotal = 0;

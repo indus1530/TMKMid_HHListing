@@ -27,8 +27,13 @@
     <string name="hh17">ڇا گذريل پنجن سالن دوران ھن گھر جي ڪنھن ڀاتي (فرد) فرد جي وفات ٿي؟</string>
     <string name="hh13">گھراڻي ۾ 10 کان 19 سالن جي عمر جي مردن /  ڇوڪرن جو تعداد؟</string>
     <string name="hh18">جيڪڏھن ھا تھ ڪيترن ڀاتين (فردن) جي وفات ٿي؟</string>
-    <string name="hh19">وفات ڪندڙ فرد جي جنس؟</string>
-    <string name="hh20">وفات ڪرڻ وقت ان جي عمر؟</string>
+    <string name="hh1901">وفات ڪندڙ فرد جي جنس؟</string>
+    <string name="hh1901a">مرد</string>
+    <string name="hh1901b">عورت</string>
+    <string name="hh1902">وفات ڪرڻ وقت ان جي عمر؟</string>
+    <string name="hh1902dd">Day</string>
+    <string name="hh1902mm">Month</string>
+    <string name="hh1902yy">Year</string>
     <string name="hhIsNewFam">ڇا ھن عمارت ۾ ڪو ٻيو / وڌيڪ خاندان رھي ٿو؟</string>
     <string name="hh14">ڇا اها جڳهه رهائشي مقصدن لاءِ استعمال ڪئي پئي وڃي؟ </string>
     <string name="na101a"> ضلعہ </string>

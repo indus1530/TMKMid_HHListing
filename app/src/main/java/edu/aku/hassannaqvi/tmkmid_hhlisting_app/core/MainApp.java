@@ -48,7 +48,7 @@ public class MainApp extends Application {
     public static int hh01txt;
     public static String hh02txt;
     public static int hh03txt = 0;
-    public static String hh07txt;
+    public static String hh07txt = "1";
     public static int fCount = 0;
     public static int fTotal = 0;
     public static int cCount = 0;
@@ -81,10 +81,8 @@ public class MainApp extends Application {
     }
 
     public static Boolean PSUExist(String psuCode) {
-        Log.d(TAG, "PSUExist: " + psuCode);
         MainApp.hh03txt = Integer.parseInt(sharedPref.getString(psuCode, "0"));
         Log.d(TAG, "PSUExist (Test): " + sharedPref.getString(psuCode, "0"));
-
         if (MainApp.hh03txt == 0) {
             Log.d(TAG, "PSUExist (False): " + MainApp.hh03txt);
             return false;
