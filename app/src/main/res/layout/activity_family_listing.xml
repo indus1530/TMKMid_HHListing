@@ -227,7 +227,7 @@
                             android:hint="@string/hh10a"
                             android:maxLength="2"
                             android:text='@{hh10a.checked ? hh11.getText().toString() : ""}'
-                            app:maxValue="20"
+                            app:maxValue="50"
                             app:minValue="1"
                             app:type="range" />
 
@@ -250,7 +250,7 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            app:maxValue="99"
+                            app:maxValue="50"
                             app:minValue="0"
                             app:type="range" />
 
@@ -273,7 +273,7 @@
                             style="@style/EditTextNum"
                             android:hint="@string/hh10a"
                             android:maxLength="2"
-                            app:maxValue="99"
+                            app:maxValue="50"
                             app:minValue="0"
                             app:type="range" />
 

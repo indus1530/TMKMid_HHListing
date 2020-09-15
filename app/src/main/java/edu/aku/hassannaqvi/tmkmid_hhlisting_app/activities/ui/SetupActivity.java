@@ -190,7 +190,6 @@ public class SetupActivity extends AppCompatActivity {
         }
     }
 
-
     public void onBtnAddHHClick(View v) {
 
         if (MainApp.hh02txt == null) {

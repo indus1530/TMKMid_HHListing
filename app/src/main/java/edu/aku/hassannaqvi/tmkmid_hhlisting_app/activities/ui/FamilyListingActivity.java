@@ -1,6 +1,5 @@
 package edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.ui;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
@@ -124,7 +124,6 @@ public class FamilyListingActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("DefaultLocale")
     private void saveDraft() throws JSONException {
         lc.setHh07(MainApp.hh07txt);
         lc.setHh15(bi.deleteHH.isChecked() ? "1" : "-1"); //Delete Family
@@ -144,18 +143,17 @@ public class FamilyListingActivity extends AppCompatActivity {
         int counter19 = 1;
         for (View view : hh19MainList) {
             MemberDeathLayoutBinding hh19Binding = DataBindingUtil.bind(view);
-            SF.put(String.format("hh19%02d" + "g", counter19), hh19Binding.hh1901a.isChecked() ? "1" : hh19Binding.hh1901b.isChecked() ? "2" : "-1");
-            SF.put(String.format("hh19%02d" + "dd", counter19), hh19Binding.hh1902dd.getText().toString());
-            SF.put(String.format("hh19%02d" + "mm", counter19), hh19Binding.hh1902mm.getText().toString());
-            SF.put(String.format("hh19%02d" + "yy", counter19), hh19Binding.hh1902yy.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "g", counter19), hh19Binding.hh1901a.isChecked() ? "1" : hh19Binding.hh1901b.isChecked() ? "2" : "-1");
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "dd", counter19), hh19Binding.hh1902dd.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "mm", counter19), hh19Binding.hh1902mm.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "yy", counter19), hh19Binding.hh1902yy.getText().toString());
 
             counter19++;
         }
 
-        SF.put("hh20", bi.hh20a.isChecked() ? "1" : bi.hh20b.isChecked() ? "2" : "-1");
-        SF.put("hh21", bi.hh21.getText().toString().isEmpty() ? "-1" : bi.hh21.getText().toString());
-
         lc.setHh19(String.valueOf(SF));
+        lc.setHh20(bi.hh20a.isChecked() ? "1" : bi.hh20b.isChecked() ? "2" : "-1");
+        lc.setHh21(bi.hh21.getText().toString().isEmpty() ? "-1" : bi.hh21.getText().toString());
     }
 
     private boolean formValidation() {

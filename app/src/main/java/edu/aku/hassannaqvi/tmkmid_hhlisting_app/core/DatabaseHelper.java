@@ -87,7 +87,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ListingEntry.COLUMN_NAME_HH05 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH06 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH07 + " TEXT, " +
-            ListingEntry.COLUMN_NAME_HH18 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH08 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH08A1 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH09 + " TEXT, " +
@@ -100,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ListingEntry.COLUMN_NAME_HH15 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH16 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH17 + " TEXT, " +
+            ListingEntry.COLUMN_NAME_HH18 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH20 + " TEXT, " +
             ListingEntry.COLUMN_NAME_HH21 + " TEXT, " +
             ListingEntry.COLUMN_ISNEWHH + " TEXT, " +
