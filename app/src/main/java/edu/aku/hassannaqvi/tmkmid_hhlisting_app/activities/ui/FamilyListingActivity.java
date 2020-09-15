@@ -1,5 +1,6 @@
 package edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -111,6 +112,7 @@ public class FamilyListingActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private void saveDraft() throws JSONException {
         lc.setHh07(MainApp.hh07txt);
         lc.setHh15(bi.deleteHH.isChecked() ? "1" : "-1"); //Delete Family
@@ -130,10 +132,10 @@ public class FamilyListingActivity extends AppCompatActivity {
         int counter19 = 1;
         for (View view : hh19MainList) {
             MemberDeathLayoutBinding hh19Binding = DataBindingUtil.bind(view);
-            SF.put(String.format("hh19%02d" + "g", counter19), hh19Binding.hh19.getText().toString());
-            SF.put(String.format("hh19%02d" + "dd", counter19), hh19Binding.hh20.getText().toString());
-            SF.put(String.format("hh19%02d" + "mm", counter19), hh19Binding.hh20.getText().toString());
-            SF.put(String.format("hh19%02d" + "yy", counter19), hh19Binding.hh20.getText().toString());
+            SF.put(String.format("hh19%02d" + "g", counter19), hh19Binding.hh1901a.isChecked() ? "1" : hh19Binding.hh1901b.isChecked() ? "2" : "-1");
+            SF.put(String.format("hh19%02d" + "dd", counter19), hh19Binding.hh1902dd.getText().toString());
+            SF.put(String.format("hh19%02d" + "mm", counter19), hh19Binding.hh1902mm.getText().toString());
+            SF.put(String.format("hh19%02d" + "yy", counter19), hh19Binding.hh1902yy.getText().toString());
 
             counter19++;
         }
