@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.MutableLiveData;
 
 import com.validatorcrawler.aliazaz.Clear;
 import com.validatorcrawler.aliazaz.Validator;
@@ -36,6 +37,7 @@ public class FamilyListingActivity extends AppCompatActivity {
     static Boolean familyFlag = false;
     ActivityFamilyListingBinding bi;
     private List<View> hh19MainList;
+    private MutableLiveData<List<View>> hh19acvList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class FamilyListingActivity extends AppCompatActivity {
         Members.txtTeamNoWithFam.set(String.format("%04d", MainApp.hh03txt) + "-" + String.format("%03d", Integer.valueOf(MainApp.hh07txt)));
 
         setupButtons();
-        hh19MainList = new ArrayList<>();
 
         bi.hhIsNewFam.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
@@ -87,6 +88,14 @@ public class FamilyListingActivity extends AppCompatActivity {
             }
         });
 
+
+        hh19MainList = new ArrayList<>();
+        if (hh19acvList == null) {
+            hh19acvList = new MutableLiveData<>();
+            Members.txtCountCounter.set("NO:" + hh19MainList.size());
+        }
+        hh19acvList.observe(this, item -> Members.txtCountCounter.set("NO:" + item.size()));
+
     }
 
     public void onTextChangedHH14(CharSequence s, int start, int before, int count) {
@@ -99,9 +108,14 @@ public class FamilyListingActivity extends AppCompatActivity {
     public void onTextChangedHH18(CharSequence s, int start, int before, int count) {
         bi.ll19Items.removeAllViews();
         hh19MainList.clear();
-        if (Objects.requireNonNull(bi.hh18.getText()).toString().trim().isEmpty()) return;
-
-        for (byte i = 0; i < Integer.parseInt(bi.hh18.getText().toString()); i++) {
+        if (bi.hh1801.getText().toString().isEmpty() || bi.hh1802.getText().toString().isEmpty() || bi.hh1803.getText().toString().isEmpty() ||
+                bi.hh1804.getText().toString().isEmpty() || bi.hh1805.getText().toString().isEmpty() || bi.hh1806.getText().toString().isEmpty() ||
+                bi.hh1807.getText().toString().isEmpty()) return;
+        int initialTotal = Integer.parseInt(bi.hh1801.getText().toString()) + Integer.parseInt(bi.hh1802.getText().toString()) + Integer.parseInt(bi.hh1803.getText().toString())
+                + Integer.parseInt(bi.hh1804.getText().toString()) + Integer.parseInt(bi.hh1805.getText().toString()) + Integer.parseInt(bi.hh1806.getText().toString())
+                + Integer.parseInt(bi.hh1807.getText().toString());
+        int total = Math.min(initialTotal, 10);
+        for (int i = 0; i < total; i++) {
             runOnUiThread(this::addViewInHH19);
         }
     }
@@ -111,6 +125,9 @@ public class FamilyListingActivity extends AppCompatActivity {
         final View rowView = inflater.inflate(R.layout.member_death_layout, null);
         bi.ll19Items.addView(rowView);
         hh19MainList.add(rowView);
+        hh19acvList.setValue(hh19MainList);
+        MemberDeathLayoutBinding rs86acvBi = DataBindingUtil.bind(rowView);
+        rs86acvBi.setLifecycleOwner(this);
     }
 
     public void setupButtons() {
@@ -139,7 +156,6 @@ public class FamilyListingActivity extends AppCompatActivity {
         lc.setHh12(bi.hh12.getText().toString().isEmpty() ? "-1" : bi.hh12.getText().toString());
         lc.setHh13(bi.hh13.getText().toString().isEmpty() ? "-1" : bi.hh13.getText().toString());
         lc.setHh17(bi.hh17a.isChecked() ? "1" : bi.hh17b.isChecked() ? "2" : "-1");
-        lc.setHh18(bi.hh18.getText().toString().isEmpty() ? "-1" : bi.hh18.getText().toString());
 
         JSONObject SF = new JSONObject();
 

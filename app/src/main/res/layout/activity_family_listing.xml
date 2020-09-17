@@ -377,37 +377,11 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <!--hh18-->
+                <!--hh1801-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh18cv"
                     style="@style/cardView"
                     android:visibility="@{hh17b.checked ? View.GONE : View.VISIBLE}">
-
-                    <LinearLayout style="@style/vlinearlayout">
-
-                        <TextView
-                            style="@style/i_textview"
-                            android:text="@string/hh18" />
-
-                        <com.edittextpicker.aliazaz.EditTextPicker
-                            android:id="@+id/hh18"
-                            style="@style/EditTextNum"
-                            android:hint="@string/hh10a"
-                            android:maxLength="2"
-                            android:onTextChanged="@{callback.onTextChangedHH18}"
-                            android:text='@{hh17a.checked ? hh18.getText().toString() : ""}'
-                            app:maxValue="10"
-                            app:minValue="1"
-                            app:type="range" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <!--hh1801-->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/hh1801cv"
-                    style="@style/cardView">
 
                     <LinearLayout style="@style/vlinearlayout">
 
@@ -429,8 +403,10 @@
                                 android:layout_weight="1"
                                 android:hint="@string/hh10a"
                                 android:maxLength="2"
+                                android:onTextChanged="@{callback.onTextChangedHH18}"
+                                android:text='@{hh17a.checked ? hh1801.getText().toString() : ""}'
                                 app:maxValue="10"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
                         </LinearLayout>
@@ -449,8 +425,10 @@
                                 android:layout_weight="1"
                                 android:hint="@string/hh10a"
                                 android:maxLength="2"
+                                android:onTextChanged="@{callback.onTextChangedHH18}"
+                                android:text='@{hh17a.checked ? hh1802.getText().toString() : ""}'
                                 app:maxValue="10"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
                         </LinearLayout>
@@ -469,8 +447,10 @@
                                 android:layout_weight="1"
                                 android:hint="@string/hh10a"
                                 android:maxLength="2"
+                                android:onTextChanged="@{callback.onTextChangedHH18}"
+                                android:text='@{hh17a.checked ? hh1803.getText().toString() : ""}'
                                 app:maxValue="10"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
                         </LinearLayout>
@@ -489,8 +469,10 @@
                                 android:layout_weight="1"
                                 android:hint="@string/hh10a"
                                 android:maxLength="2"
+                                android:onTextChanged="@{callback.onTextChangedHH18}"
+                                android:text='@{hh17a.checked ? hh1804.getText().toString() : ""}'
                                 app:maxValue="10"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
                         </LinearLayout>
@@ -509,8 +491,10 @@
                                 android:layout_weight="1"
                                 android:hint="@string/hh10a"
                                 android:maxLength="2"
+                                android:onTextChanged="@{callback.onTextChangedHH18}"
+                                android:text='@{hh17a.checked ? hh1805.getText().toString() : ""}'
                                 app:maxValue="10"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
                         </LinearLayout>
@@ -529,8 +513,10 @@
                                 android:layout_weight="1"
                                 android:hint="@string/hh10a"
                                 android:maxLength="2"
+                                android:onTextChanged="@{callback.onTextChangedHH18}"
+                                android:text='@{hh17a.checked ? hh1806.getText().toString() : ""}'
                                 app:maxValue="10"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
                         </LinearLayout>
@@ -549,8 +535,10 @@
                                 android:layout_weight="1"
                                 android:hint="@string/hh10a"
                                 android:maxLength="2"
+                                android:onTextChanged="@{callback.onTextChangedHH18}"
+                                android:text='@{hh17a.checked ? hh1807.getText().toString() : ""}'
                                 app:maxValue="10"
-                                app:minValue="1"
+                                app:minValue="0"
                                 app:type="range" />
 
                         </LinearLayout>
@@ -558,6 +546,7 @@
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh19cv"

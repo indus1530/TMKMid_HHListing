@@ -6,4 +6,5 @@ public final class Members {
     public static final ObservableField<String> txtTeamNoWithFam = new ObservableField<>();
     public static final ObservableField<String> txtClusterCode = new ObservableField<>();
     public static final ObservableField<String> txtStructureNo = new ObservableField<>();
+    public static final ObservableField<String> txtCountCounter = new ObservableField<>();
 }
