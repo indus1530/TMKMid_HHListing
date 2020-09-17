@@ -100,8 +100,9 @@ public class FamilyListingActivity extends AppCompatActivity {
         bi.ll19Items.removeAllViews();
         hh19MainList.clear();
         if (Objects.requireNonNull(bi.hh18.getText()).toString().trim().isEmpty()) return;
+
         for (byte i = 0; i < Integer.parseInt(bi.hh18.getText().toString()); i++) {
-            addViewInHH19();
+            runOnUiThread(this::addViewInHH19);
         }
     }
 
@@ -141,13 +142,19 @@ public class FamilyListingActivity extends AppCompatActivity {
         lc.setHh18(bi.hh18.getText().toString().isEmpty() ? "-1" : bi.hh18.getText().toString());
 
         JSONObject SF = new JSONObject();
+
+//        SF.put("hh1801",);
+
         int counter19 = 1;
         for (View view : hh19MainList) {
             MemberDeathLayoutBinding hh19Binding = DataBindingUtil.bind(view);
-            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "g", counter19), hh19Binding.hh1901a.isChecked() ? "1" : hh19Binding.hh1901b.isChecked() ? "2" : "-1");
-            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "dd", counter19), hh19Binding.hh1902dd.getText().toString());
-            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "mm", counter19), hh19Binding.hh1902mm.getText().toString());
-            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "yy", counter19), hh19Binding.hh1902yy.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "a", counter19), hh19Binding.hh1901a.isChecked() ? "1" : hh19Binding.hh1901b.isChecked() ? "2" : "-1");
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "bdd", counter19), hh19Binding.hh1902dd.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "bmm", counter19), hh19Binding.hh1902mm.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "byy", counter19), hh19Binding.hh1902yy.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "cdd", counter19), hh19Binding.hh1903dd.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "cmm", counter19), hh19Binding.hh1903mm.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "cyy", counter19), hh19Binding.hh1903yy.getText().toString());
 
             counter19++;
         }

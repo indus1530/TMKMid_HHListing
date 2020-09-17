@@ -30,10 +30,15 @@
     <string name="hh1901">وفات ڪندڙ فرد جي جنس؟</string>
     <string name="hh1901a">مرد</string>
     <string name="hh1901b">عورت</string>
-    <string name="hh1902">وفات ڪرڻ وقت ان جي عمر؟</string>
+    <string name="hh1902">فوت ٿيل فرد جي پيدائش جي تاريخ؟</string>
     <string name="hh1902dd">ڏينھن</string>
     <string name="hh1902mm">مھينا</string>
     <string name="hh1902yy">سال</string>
+    <string name="hh1903">وفات ڪرڻ وقت ان جي عمر؟</string>
+    <string name="hh1903dd">ڏينھن</string>
+    <string name="hh1903mm">مھينا</string>
+    <string name="hh1903yy">سال</string>
+    <string name="hh1904">وفات جو سبب</string>
     <string name="hh20">ڇا توھان جي گھر ۾ گذريل پنجن سالن ۾ ڪنھن زندھ ٻار جي پئدائش ٿي؟</string>
     <string name="hh21">جيڪڏھن ھا ته ڪيترا زندھ ٻار پيدا ٿيا؟</string>
     <string name="hhIsNewFam">ڇا ھن عمارت ۾ ڪو ٻيو / وڌيڪ خاندان رھي ٿو؟</string>
