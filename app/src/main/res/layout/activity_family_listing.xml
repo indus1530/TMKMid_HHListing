@@ -16,7 +16,6 @@
             type="edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members" />
     </data>
 
-
     <ScrollView
         style="@style/i_scrollview"
         android:fadeScrollbars="false"
@@ -25,6 +24,7 @@
         android:scrollbarSize="10dip"
         android:textDirection="rtl"
         tools:context=".activities.ui.FamilyListingActivity">
+
 
         <LinearLayout
             android:id="@+id/activity_household_listing"
@@ -62,6 +62,7 @@
                 android:text="@string/delete"
                 android:visibility="gone"
                 tools:visibility="visible" />
+
 
             <LinearLayout
                 android:id="@+id/fldGrpSecB01"
@@ -376,6 +377,7 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <!--hh18-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/hh18cv"
                     style="@style/cardView"
@@ -397,6 +399,161 @@
                             app:maxValue="10"
                             app:minValue="1"
                             app:type="range" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!--hh1801-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/hh1801cv"
+                    style="@style/cardView">
+
+                    <LinearLayout style="@style/vlinearlayout">
+
+                        <TextView
+                            style="@style/i_textview"
+                            android:text="@string/hh18" />
+
+                        <LinearLayout style="@style/hlinearlayout">
+
+                            <TextView
+                                style="@style/i_textview"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/hh1801" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/hh1801"
+                                style="@style/EditTextNum"
+                                android:layout_weight="1"
+                                android:hint="@string/hh10a"
+                                android:maxLength="2"
+                                app:maxValue="10"
+                                app:minValue="1"
+                                app:type="range" />
+
+                        </LinearLayout>
+
+                        <LinearLayout style="@style/hlinearlayout">
+
+                            <TextView
+                                style="@style/i_textview"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/hh1802" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/hh1802"
+                                style="@style/EditTextNum"
+                                android:layout_weight="1"
+                                android:hint="@string/hh10a"
+                                android:maxLength="2"
+                                app:maxValue="10"
+                                app:minValue="1"
+                                app:type="range" />
+
+                        </LinearLayout>
+
+                        <LinearLayout style="@style/hlinearlayout">
+
+                            <TextView
+                                style="@style/i_textview"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/hh1803" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/hh1803"
+                                style="@style/EditTextNum"
+                                android:layout_weight="1"
+                                android:hint="@string/hh10a"
+                                android:maxLength="2"
+                                app:maxValue="10"
+                                app:minValue="1"
+                                app:type="range" />
+
+                        </LinearLayout>
+
+                        <LinearLayout style="@style/hlinearlayout">
+
+                            <TextView
+                                style="@style/i_textview"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/hh1804" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/hh1804"
+                                style="@style/EditTextNum"
+                                android:layout_weight="1"
+                                android:hint="@string/hh10a"
+                                android:maxLength="2"
+                                app:maxValue="10"
+                                app:minValue="1"
+                                app:type="range" />
+
+                        </LinearLayout>
+
+                        <LinearLayout style="@style/hlinearlayout">
+
+                            <TextView
+                                style="@style/i_textview"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/hh1805" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/hh1805"
+                                style="@style/EditTextNum"
+                                android:layout_weight="1"
+                                android:hint="@string/hh10a"
+                                android:maxLength="2"
+                                app:maxValue="10"
+                                app:minValue="1"
+                                app:type="range" />
+
+                        </LinearLayout>
+
+                        <LinearLayout style="@style/hlinearlayout">
+
+                            <TextView
+                                style="@style/i_textview"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/hh1806" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/hh1806"
+                                style="@style/EditTextNum"
+                                android:layout_weight="1"
+                                android:hint="@string/hh10a"
+                                android:maxLength="2"
+                                app:maxValue="10"
+                                app:minValue="1"
+                                app:type="range" />
+
+                        </LinearLayout>
+
+                        <LinearLayout style="@style/hlinearlayout">
+
+                            <TextView
+                                style="@style/i_textview"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/hh1807" />
+
+                            <com.edittextpicker.aliazaz.EditTextPicker
+                                android:id="@+id/hh1807"
+                                style="@style/EditTextNum"
+                                android:layout_weight="1"
+                                android:hint="@string/hh10a"
+                                android:maxLength="2"
+                                app:maxValue="10"
+                                app:minValue="1"
+                                app:type="range" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -441,6 +598,7 @@
 
             </LinearLayout>
 
+
             <Button
                 android:id="@+id/btnAddNewHousehold"
                 style="@style/button"
@@ -465,7 +623,9 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
 
+
         </LinearLayout>
+
 
     </ScrollView>
 

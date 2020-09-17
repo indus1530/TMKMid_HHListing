@@ -15,7 +15,6 @@
             type="edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members" />
     </data>
 
-
     <LinearLayout
         android:id="@+id/fldGrpSecMDL"
         style="@style/vlinearlayout"

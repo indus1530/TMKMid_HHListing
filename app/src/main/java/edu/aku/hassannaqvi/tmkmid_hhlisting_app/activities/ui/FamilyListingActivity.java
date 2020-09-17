@@ -143,7 +143,13 @@ public class FamilyListingActivity extends AppCompatActivity {
 
         JSONObject SF = new JSONObject();
 
-//        SF.put("hh1801",);
+        SF.put("hh1801", bi.hh1801.getText().toString().isEmpty() ? "-1" : bi.hh1801.getText().toString());
+        SF.put("hh1802", bi.hh1802.getText().toString().isEmpty() ? "-1" : bi.hh1802.getText().toString());
+        SF.put("hh1803", bi.hh1803.getText().toString().isEmpty() ? "-1" : bi.hh1803.getText().toString());
+        SF.put("hh1804", bi.hh1804.getText().toString().isEmpty() ? "-1" : bi.hh1804.getText().toString());
+        SF.put("hh1805", bi.hh1805.getText().toString().isEmpty() ? "-1" : bi.hh1805.getText().toString());
+        SF.put("hh1806", bi.hh1806.getText().toString().isEmpty() ? "-1" : bi.hh1806.getText().toString());
+        SF.put("hh1807", bi.hh1807.getText().toString().isEmpty() ? "-1" : bi.hh1807.getText().toString());
 
         int counter19 = 1;
         for (View view : hh19MainList) {
@@ -155,6 +161,7 @@ public class FamilyListingActivity extends AppCompatActivity {
             SF.put(String.format(Locale.getDefault(), "hh19%02d" + "cdd", counter19), hh19Binding.hh1903dd.getText().toString());
             SF.put(String.format(Locale.getDefault(), "hh19%02d" + "cmm", counter19), hh19Binding.hh1903mm.getText().toString());
             SF.put(String.format(Locale.getDefault(), "hh19%02d" + "cyy", counter19), hh19Binding.hh1903yy.getText().toString());
+            SF.put(String.format(Locale.getDefault(), "hh19%02d" + "d", counter19), hh19Binding.hh1904dd.getText().toString());
 
             counter19++;
         }

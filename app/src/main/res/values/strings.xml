@@ -27,6 +27,13 @@
     <string name="hh17">ڇا گذريل پنجن سالن دوران ھن گھر جي ڪنھن ڀاتي (فرد) فرد جي وفات ٿي؟</string>
     <string name="hh13">گھراڻي ۾ 10 کان 19 سالن جي عمر جي مردن /  ڇوڪرن جو تعداد؟</string>
     <string name="hh18">جيڪڏھن ھا تھ ڪيترن ڀاتين (فردن) جي وفات ٿي؟</string>
+    <string name="hh1801">هڪ مهيني کان گھٽ</string>
+    <string name="hh1802">هڪ مهيني کان 11 مهينا</string>
+    <string name="hh1803">1 سال کان 4 سال</string>
+    <string name="hh1804">5 کان 9 سال</string>
+    <string name="hh1805">10 کان 19 سال</string>
+    <string name="hh1806">20 کان 49 سال</string>
+    <string name="hh1807">49 سالنن کان وڌيڪ</string>
     <string name="hh1901">وفات ڪندڙ فرد جي جنس؟</string>
     <string name="hh1901a">مرد</string>
     <string name="hh1901b">عورت</string>
