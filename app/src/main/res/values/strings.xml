@@ -63,6 +63,8 @@
     <string name="other"> دیگر </string>
     <string name="specify"> وضاحت کریں </string>
 
+    <string name="death_heading">گذريل پنجن سالن جي دوران توهان پنهنجي خاندان ۾ ٿيل  (%)  فوتگين جي اطلاع ڏني آهي مهرباني ڪري ان جي باري ۾ تفصيل سان ٻڌايو؟</string>
+
     <string name="btnSync">Download Data</string>
     <string name="btnUpload">Upload Data</string>
     <string name="prompt_email">Email</string>

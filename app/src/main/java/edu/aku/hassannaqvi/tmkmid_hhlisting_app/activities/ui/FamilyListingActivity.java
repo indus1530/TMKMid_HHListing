@@ -27,45 +27,37 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.ActivityFamilyListingBinding;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.databinding.MemberDeathLayoutBinding;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt;
+import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.WarningActivityInterface;
 
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.appInfo;
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp.lc;
 
-public class FamilyListingActivity extends AppCompatActivity {
+public class FamilyListingActivity extends AppCompatActivity implements WarningActivityInterface {
 
     public static String TAG = FamilyListingActivity.class.getName();
     static Boolean familyFlag = false;
     ActivityFamilyListingBinding bi;
     private List<View> hh19MainList;
     private MutableLiveData<List<View>> hh19acvList;
+    private boolean deathFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bi = DataBindingUtil.setContentView(this, R.layout.activity_family_listing);
         bi.setCallback(this);
-        Members.txtTeamNoWithFam.set(String.format("%04d", MainApp.hh03txt) + "-" + String.format("%03d", Integer.valueOf(MainApp.hh07txt)));
-
+        bi.setMember(new Members());
+        Members.txtTeamNoWithFam.set("S" + String.format(Locale.getDefault(), "%04d", MainApp.hh03txt) + "-H" + String.format(Locale.getDefault(), "%03d", Integer.valueOf(MainApp.hh07txt)));
         setupButtons();
-
         bi.hhIsNewFam.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
                 bi.btnAddNewHousehold.setVisibility(View.VISIBLE);
                 bi.btnAddHousehold.setVisibility(View.GONE);
-                if (MainApp.hh07txt.equals("1")) {
-                    MainApp.hh07txt = "1";
-                }
             } else {
                 bi.btnAddNewHousehold.setVisibility(View.GONE);
                 setupButtons();
-                if (MainApp.fTotal == 0) {
-                    if (MainApp.hh07txt.equals("1")) {
-                        MainApp.hh07txt = "1";
-                    }
-                }
             }
-            Members.txtTeamNoWithFam.set("S" + String.format(Locale.getDefault(), "%04d", MainApp.hh03txt)
-                    + "-H" + String.format(Locale.getDefault(), "%03d", Integer.valueOf(MainApp.hh07txt)));
         });
 
         bi.deleteHH.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -92,9 +84,9 @@ public class FamilyListingActivity extends AppCompatActivity {
         hh19MainList = new ArrayList<>();
         if (hh19acvList == null) {
             hh19acvList = new MutableLiveData<>();
-            Members.txtCountCounter.set("NO:" + hh19MainList.size());
+            Members.txtCountCounter.set("Death: " + hh19MainList.size());
         }
-        hh19acvList.observe(this, item -> Members.txtCountCounter.set("NO:" + item.size()));
+        hh19acvList.observe(this, item -> Members.txtCountCounter.set("Death: " + item.size()));
 
     }
 
@@ -108,15 +100,24 @@ public class FamilyListingActivity extends AppCompatActivity {
     public void onTextChangedHH18(CharSequence s, int start, int before, int count) {
         bi.ll19Items.removeAllViews();
         hh19MainList.clear();
+        deathFlag = false;
         if (bi.hh1801.getText().toString().isEmpty() || bi.hh1802.getText().toString().isEmpty() || bi.hh1803.getText().toString().isEmpty() ||
                 bi.hh1804.getText().toString().isEmpty() || bi.hh1805.getText().toString().isEmpty() || bi.hh1806.getText().toString().isEmpty() ||
                 bi.hh1807.getText().toString().isEmpty()) return;
         int initialTotal = Integer.parseInt(bi.hh1801.getText().toString()) + Integer.parseInt(bi.hh1802.getText().toString()) + Integer.parseInt(bi.hh1803.getText().toString())
                 + Integer.parseInt(bi.hh1804.getText().toString()) + Integer.parseInt(bi.hh1805.getText().toString()) + Integer.parseInt(bi.hh1806.getText().toString())
                 + Integer.parseInt(bi.hh1807.getText().toString());
-        int total = Math.min(initialTotal, 10);
-        for (int i = 0; i < total; i++) {
-            runOnUiThread(this::addViewInHH19);
+
+        bi.deathCount.setText(getResources().getString(R.string.death_heading).replace("%", String.valueOf(initialTotal)));
+
+        if (initialTotal > 10 || initialTotal == 0) {
+            deathFlag = true;
+            UtilsKt.openWarningActivity(this, 1, "WARNING!", "Maximum deaths in five years needs to be 10 and minimum 01. Please recheck it.", "Re-Enter", "Cancel");
+        } else {
+            deathFlag = false;
+            for (int i = 0; i < initialTotal; i++) {
+                runOnUiThread(this::addViewInHH19);
+            }
         }
     }
 
@@ -198,6 +199,10 @@ public class FamilyListingActivity extends AppCompatActivity {
         if ((hh11 + hh12 + hh13) > Integer.parseInt(bi.hh14.getText().toString()))
             return Validator.emptyCustomTextBox(this, bi.hh14, "Total not matching!!");
 
+        if (!deathFlag) {
+            UtilsKt.openWarningActivity(this, 1, "WARNING!", "Maximum deaths in five years needs to be 10 and minimum 01. Please recheck it.", "Re-Enter", "Cancel");
+            return false;
+        }
         return true;
     }
 
@@ -286,6 +291,10 @@ public class FamilyListingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "Back Button NOT Allowed!", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void callWarningActivity(int id) {
+        bi.hh1801.setFocusable(true);
     }
 }

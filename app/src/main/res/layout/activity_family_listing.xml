@@ -543,18 +543,27 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/hh19cv"
+                            style="@style/cardView">
 
-                </androidx.cardview.widget.CardView>
+                            <LinearLayout style="@style/vlinearlayout">
 
+                                <TextView
+                                    android:id="@+id/deathCount"
+                                    style="@style/textView3Head"
+                                    android:background="@color/colorRedsub"
+                                    android:text="@string/death_heading" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/hh19cv"
-                    style="@style/cardView">
+                                <LinearLayout
+                                    android:id="@+id/ll19Items"
+                                    style="@style/vlinearlayout">
 
-                    <LinearLayout
-                        android:id="@+id/ll19Items"
-                        style="@style/vlinearlayout">
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
 

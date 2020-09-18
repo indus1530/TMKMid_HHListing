@@ -120,6 +120,7 @@ fun openWarningActivity(
     dialog.window!!.attributes = params
     dialog.show()
     bi.btnOk.setOnClickListener {
+        dialog.dismiss()
         val warningActivity = activity as WarningActivityInterface
         warningActivity.callWarningActivity(id)
     }
