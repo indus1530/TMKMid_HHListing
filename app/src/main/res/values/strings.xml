@@ -50,10 +50,10 @@
     <string name="hh21">جيڪڏھن ھا ته ڪيترا زندھ ٻار پيدا ٿيا؟</string>
     <string name="hhIsNewFam">ڇا ھن عمارت ۾ ڪو ٻيو / وڌيڪ خاندان رھي ٿو؟</string>
     <string name="hh14">ڇا اها جڳهه رهائشي مقصدن لاءِ استعمال ڪئي پئي وڃي؟ </string>
-    <string name="na101a"> ضلعہ </string>
-    <string name="na101b">  تحصیل / تعلُقہ </string>
-    <string name="na101c"> یونین کونسل </string>
-    <string name="na101d"> ڳوٺ/ پاڙي </string>
+    <string name="na101a"> ڪلسٽر/ بلاڪ نمبر </string>
+    <string name="na101b"> يونين ڪائونسل </string>
+    <string name="na101c"> ڳوٺ/ پاڙي </string>
+    <string name="na101d">  ڳوٺ جو ڪوڊ </string>
     <string name="yes"> ھا </string>
     <string name="no"> نه </string>
     <string name="delete"> Delete this HH </string>

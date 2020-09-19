@@ -199,7 +199,7 @@ public class FamilyListingActivity extends AppCompatActivity implements WarningA
         if ((hh11 + hh12 + hh13) > Integer.parseInt(bi.hh14.getText().toString()))
             return Validator.emptyCustomTextBox(this, bi.hh14, "Total not matching!!");
 
-        if (!deathFlag) {
+        if (deathFlag) {
             UtilsKt.openWarningActivity(this, 1, "WARNING!", "Maximum deaths in five years needs to be 10 and minimum 01. Please recheck it.", "Re-Enter", "Cancel");
             return false;
         }
@@ -295,6 +295,6 @@ public class FamilyListingActivity extends AppCompatActivity implements WarningA
 
     @Override
     public void callWarningActivity(int id) {
-        bi.hh1801.setFocusable(true);
+        bi.hh1801.requestFocus();
     }
 }

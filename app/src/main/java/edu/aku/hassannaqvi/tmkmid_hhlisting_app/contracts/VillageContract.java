@@ -80,7 +80,7 @@ public class VillageContract {
 
     public static abstract class VillageTable implements BaseColumns {
 
-        public static final String TABLE_NAME = "villages";
+        public static final String TABLE_NAME = "villages_el";
         public static final String COLUMN_VILLAGE_CODE = "village_code";
         public static final String COLUMN_VILLAGE_NAME = "village_name";
         public static final String COLUMN_AREA_CODE = "area_code";

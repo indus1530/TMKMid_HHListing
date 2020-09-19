@@ -23,7 +23,7 @@
                 android:id="@+id/testing"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimaryAlpha1"
+                android:background="@color/colorRedsub"
                 android:elevation="6dp"
                 android:gravity="center"
                 android:keepScreenOn="true"
@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/black"
                 android:gravity="center_horizontal"
+                android:padding="10dp"
                 android:text="@string/records_summary"
                 android:textColor="@color/green"
                 android:textSize="24sp" />
@@ -66,12 +67,11 @@
                 android:textSize="24sp"
                 android:visibility="gone" />
 
-
             <LinearLayout
                 android:id="@+id/fldGrpna10"
                 style="@style/vlinearlayout">
 
-                <!--Village-->
+                <!--Area-->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -88,7 +88,39 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Select Village"
+                            android:text="چونڊيل علائقو"
+                            android:textAlignment="center" />
+
+                        <Spinner
+                            android:id="@+id/spArea"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_weight="2" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!--Village-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                        style="@style/linearlayout_view_wt_bound"
+                        android:layout_height="match_parent"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="چونڊيل ڳوٺ"
                             android:textAlignment="center" />
 
                         <Spinner
@@ -102,7 +134,7 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
+                <!--<androidx.cardview.widget.CardView
                     android:id="@+id/checkPSUcv"
                     style="@style/cardView"
                     android:layout_margin="20dp">
@@ -133,114 +165,115 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>-->
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/fldGrpna101"
                 style="@style/vlinearlayout"
+                android:layout_marginTop="20dp"
                 android:visibility="gone"
                 tools:visibility="visible">
-                <!--
-                                &lt;!&ndash; Province &ndash;&gt;
-                                <androidx.cardview.widget.CardView
-                                    android:id="@+id/na101acv"
-                                    style="@style/cardView">
 
-                                    <LinearLayout style="@style/hlinearlayout">
+                <!-- Province -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/na101acv"
+                    style="@style/cardView">
 
-                                        &lt;!&ndash;hh03&ndash;&gt;
-                                        <TextView
-                                            style="@style/i_textview"
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="2"
-                                            android:gravity="center"
-                                            android:text="@string/na101a" />
+                    <LinearLayout style="@style/hlinearlayout">
 
-
-                                        <TextView
-                                            android:id="@+id/na101a"
-                                            style="@style/i_textview"
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="3"
-                                            android:background="@color/white"
-                                            android:gravity="center"
-                                            android:text="@string/na101a"
-                                            android:textColor="@color/colorPrimaryDark" />
-
-                                    </LinearLayout>
-
-                                </androidx.cardview.widget.CardView>
+                        <!--hh03-->
+                        <TextView
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@string/na101a" />
 
 
-                                &lt;!&ndash; District  &ndash;&gt;
-                                <androidx.cardview.widget.CardView
-                                    android:id="@+id/na101bcv"
-                                    style="@style/cardView">
+                        <TextView
+                            android:id="@+id/na101a"
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:text="@string/na101a"
+                            android:textColor="@color/colorPrimaryDark" />
 
-                                    <LinearLayout style="@style/hlinearlayout">
+                    </LinearLayout>
 
-                                        &lt;!&ndash;hh04&ndash;&gt;
-                                        <TextView
-                                            style="@style/i_textview"
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="2"
-                                            android:gravity="center"
-                                            android:text="@string/na101b" />
-
-
-                                        <TextView
-                                            android:id="@+id/na101b"
-                                            style="@style/i_textview"
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="3"
-                                            android:background="@color/white"
-                                            android:gravity="center"
-                                            android:text="@string/na101b"
-                                            android:textColor="@color/colorPrimaryDark" />
-
-                                    </LinearLayout>
-
-                                </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
 
-                                &lt;!&ndash; Tehsil  &ndash;&gt;
-                                <androidx.cardview.widget.CardView
-                                    android:id="@+id/na101ccv"
-                                    style="@style/cardView">
+                <!-- District  -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/na101bcv"
+                    style="@style/cardView"
+                    android:visibility="gone">
 
-                                    <LinearLayout style="@style/hlinearlayout">
+                    <LinearLayout style="@style/hlinearlayout">
 
-                                        &lt;!&ndash;hh05&ndash;&gt;
-                                        <TextView
-                                            style="@style/i_textview"
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="2"
-                                            android:gravity="center"
-                                            android:text="@string/na101c" />
+                        <!--hh04-->
+                        <TextView
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@string/na101b" />
 
 
-                                        <TextView
-                                            android:id="@+id/na101c"
-                                            style="@style/i_textview"
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="3"
-                                            android:background="@color/white"
-                                            android:gravity="center"
-                                            android:text="@string/na101c"
-                                            android:textColor="@color/colorPrimaryDark" />
+                        <TextView
+                            android:id="@+id/na101b"
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:text="@string/na101b"
+                            android:textColor="@color/colorPrimaryDark" />
 
-                                    </LinearLayout>
+                    </LinearLayout>
 
-                                </androidx.cardview.widget.CardView>-->
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- Tehsil  -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/na101ccv"
+                    style="@style/cardView">
+
+                    <LinearLayout style="@style/hlinearlayout">
+
+                        <!--hh05-->
+                        <TextView
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@string/na101c" />
+
+
+                        <TextView
+                            android:id="@+id/na101c"
+                            style="@style/i_textview"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:text="@string/na101c"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
 
                 <!-- Place   -->
@@ -295,64 +328,22 @@
                     android:layoutDirection="rtl"
                     android:text="@string/confirmcity" />
 
-            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lllstwarning"
+                    style="@style/vlinearlayout"
+                    android:layout_marginTop="15dp"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
+                    <Button
+                        android:id="@+id/openForm"
+                        style="@style/button"
+                        android:onClick="@{callback::StartListingBtn}"
+                        android:text="@string/start_line_listing" />
 
-            <LinearLayout
-                android:id="@+id/lllstwarning"
-                style="@style/vlinearlayout"
-                android:layout_marginTop="15dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <Button
-                    android:id="@+id/openForm"
-                    style="@style/button"
-                    android:onClick="@{callback::StartListingBtn}"
-                    android:text="@string/start_line_listing" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/districtN"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="#ef3030"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/ucN"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="#ef3030"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/psuN"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="#ef3030"
-                    android:visibility="gone" />
+                </LinearLayout>
 
             </LinearLayout>
-
-            <Button
-                android:id="@+id/syncFunction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:onClick="syncFunction"
-                android:text="@string/sync_listing"
-                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/adminBlock"

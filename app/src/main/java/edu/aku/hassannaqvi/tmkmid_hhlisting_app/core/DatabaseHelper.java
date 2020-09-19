@@ -1283,7 +1283,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //Get All EnumBlock
-    public List<VillageContract> getEnumBlock() {
+    public List<VillageContract> getEnumBlock(String uc_id) {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = null;
@@ -1295,8 +1295,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 VillageTable.COLUMN_CLUSTER_CODE,
         };
 
-        String whereClause = null;
-        String[] whereArgs = null;
+        String whereClause = VillageTable.COLUMN_AREA_CODE + " LIKE ? ";
+        String[] whereArgs = {"" + uc_id + "%"};
         String groupBy = null;
         String having = null;
 

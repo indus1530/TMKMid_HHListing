@@ -61,7 +61,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                 position = 2;
                 break;
             case "Villages":
-                position = 0;
+                position = 3;
                 break;
         }
         list.get(position).settableName(syncClass);
@@ -95,7 +95,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                 position = 2;
                 break;
             case "Villages":
-                position = 0;
+                position = 3;
                 break;
         }
         list.get(position).setstatus("Syncing");
@@ -132,7 +132,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                 case "Villages":
                     url = new URL(MainApp._HOST_URL + MainApp._SERVER_GET_URL);
                     tableName = VillageContract.VillageTable.TABLE_NAME;
-                    position = 0;
+                    position = 3;
                     break;
             }
 
@@ -143,6 +143,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
             switch (syncClass) {
                 case "UCs":
                 case "User":
+                case "Villages":
                     urlConnection.setRequestMethod("POST");
                     urlConnection.setDoOutput(true);
                     urlConnection.setDoInput(true);
@@ -163,31 +164,6 @@ public class GetAllData extends AsyncTask<String, String, String> {
                     wr.writeBytes(json.toString());
                     wr.flush();
                     wr.close();
-                    break;
-
-
-                case "Villages":
-                    urlConnection.setRequestMethod("POST");
-                    urlConnection.setDoOutput(true);
-                    urlConnection.setDoInput(true);
-                    urlConnection.setRequestProperty("Content-Type", "application/json");
-                    urlConnection.setRequestProperty("charset", "utf-8");
-                    urlConnection.setUseCaches(false);
-
-                    // Starts the query
-                    urlConnection.connect();
-                    DataOutputStream wr2 = new DataOutputStream(urlConnection.getOutputStream());
-                    JSONObject json2 = new JSONObject();
-                    try {
-                        json2.put("table", tableName);
-                        json2.put("uc_code", MainApp.DIST_ID);
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
-                    Log.d(TAG, "downloadUrl: " + json2.toString());
-                    wr2.writeBytes(json2.toString());
-                    wr2.flush();
-                    wr2.close();
                     break;
             }
 
@@ -243,7 +219,7 @@ public class GetAllData extends AsyncTask<String, String, String> {
                         case "Villages":
                             jsonArray = new JSONArray(result);
                             insertCount = db.syncVillages(jsonArray);
-                            position = 0;
+                            position = 3;
                             break;
                     }
 

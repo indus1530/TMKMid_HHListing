@@ -24,8 +24,6 @@ import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 
-import com.validatorcrawler.aliazaz.Validator;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -57,7 +55,9 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.otherClasses.models.Members;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.WarningActivityInterface;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS.REQUEST_APP_UPDATE;
@@ -77,8 +77,9 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
     private String preVer = "", newVer = "", clusterName;
 
     //Setting Spinner
-    List<String> villageName;
+    List<String> areaName, villageName;
     Map<String, VillageContract> villageMap;
+    List<VillageContract> areaList;
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -219,27 +220,27 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
     @Override
     protected void onResume() {
         super.onResume();
-        gettingVillageData();
+        gettingAreaData();
     }
 
 
     //Screen Buttons
     public void CheckClusterBtn(View v) {
 
-        if (MainApp.userEmail.equals("0000")) {
+       /* if (MainApp.userEmail.equals("0000")) {
             finish();
             return;
         }
 
         if (!Validator.emptyCheckingContainer(this, bi.fldGrpna10)) return;
 
-        boolean loginFlag = true;
-            /*int cluster = Integer.parseInt(bi.txtPSU.getText().toString().substring(0, 3));
-            if (cluster < 900) {
-                loginFlag = !(MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user"));
-            } else {
-                loginFlag = MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user");
-            }*/
+        boolean loginFlag;
+        int cluster = Integer.parseInt(bi.txtPSU.getText().toString().substring(0, 3));
+        if (cluster < 900) {
+            loginFlag = !(MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user"));
+        } else {
+            loginFlag = MainApp.userEmail.equals("test1234") || MainApp.userEmail.equals("dmu@aku") || MainApp.userEmail.substring(0, 4).equals("user");
+        }
         if (loginFlag) {
             VillageContract villageContract = appInfo.getDbHelper().getEnumBlock(bi.txtPSU.getText().toString(), villageMap.get(bi.spVillage.getSelectedItem().toString()).getVillage_code());
             if (villageContract != null) {
@@ -247,27 +248,16 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
                 if (!selected.equals("")) {
 
-                        /*String[] selSplit = selected.split("\\|");
+                    String[] selSplit = selected.split("\\|");
 
-                        bi.na101a.setText(selSplit[0]);
-                        bi.na101b.setText(selSplit[1].equals("") ? "----" : selSplit[1]);
-                        bi.na101c.setText(selSplit[2].equals("") ? "----" : selSplit[2]);
-                        bi.na101d.setText(selSplit[3]);
-                        clusterName = selSplit[3];*/
+                    bi.na101a.setText(selSplit[0]);
+                    bi.na101b.setText(selSplit[1].equals("") ? "----" : selSplit[1]);
+                    bi.na101c.setText(selSplit[2].equals("") ? "----" : selSplit[2]);
+                    bi.na101d.setText(selSplit[3]);
+                    clusterName = selSplit[3];
 
-                    bi.na101d.setText(selected);
-                    clusterName = selected;
+                    onSettingDropDownContent(View.VISIBLE);
 
-                    bi.fldGrpna101.setVisibility(View.VISIBLE);
-                    bi.chkconfirm.setOnCheckedChangeListener((compoundButton, b) -> {
-                        if (bi.chkconfirm.isChecked()) {
-                            bi.openForm.setBackgroundColor(getResources().getColor(R.color.green));
-                            bi.lllstwarning.setVisibility(View.VISIBLE);
-                            MainApp.hh01txt = 1;
-                        } else {
-                            bi.lllstwarning.setVisibility(View.GONE);
-                        }
-                    });
 
                     MainApp.hh02txt = bi.txtPSU.getText().toString();
                     MainApp.enumCode = villageContract.getVillage_code();
@@ -281,12 +271,12 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
         } else {
             Toast.makeText(this, "Can't proceed test cluster for current user!!", Toast.LENGTH_SHORT).show();
             bi.lllstwarning.setVisibility(View.GONE);
-        }
+        }*/
 
     }
 
     public void OpenClusterMapBtn(View view) {
-        Collection<VerticesContract> v = appInfo.getDbHelper().getVerticesByCluster(bi.txtPSU.getText().toString());
+        Collection<VerticesContract> v = appInfo.getDbHelper().getVerticesByCluster(clusterName);
         if (v.size() > 3) {
             startActivity(new Intent(this, MapsActivity.class));
         } else {
@@ -313,9 +303,6 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
     //TextWatchers
     public void txtPSUOnTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        bi.districtN.setText(null);
-        bi.psuN.setText(null);
-        bi.ucN.setText(null);
         bi.fldGrpna101.setVisibility(View.GONE);
         bi.lllstwarning.setVisibility(View.GONE);
         bi.chkconfirm.setChecked(false);
@@ -324,10 +311,23 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
     //Other Dependent Functions
     private void setUIContent() {
-        bi.spVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        bi.spArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bi.txtPSU.setText(null);
+                onSettingDropDownContent(View.GONE);
+                if (i == 0) {
+                    bi.spVillage.setEnabled(false);
+                    bi.spVillage.setSelection(0);
+                    return;
+                }
+                initializingVillageVariables();
+                for (VillageContract item : areaList) {
+                    if (item.getArea_code().equals(bi.spArea.getSelectedItem().toString())) {
+                        villageName.add(item.getVillage_name());
+                        villageMap.put(item.getVillage_name(), item);
+                    }
+                }
+                bi.spVillage.setAdapter(new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, villageName));
             }
 
             @Override
@@ -336,6 +336,52 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
             }
         });
 
+
+        bi.spVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    onSettingDropDownContent(View.GONE);
+                    return;
+                }
+                VillageContract village = villageMap.get(bi.spVillage.getSelectedItem().toString());
+                bi.na101a.setText(village.getCluster_code());
+                bi.na101b.setText("");
+                bi.na101c.setText(village.getVillage_name());
+                bi.na101d.setText(village.getVillage_code());
+                clusterName = village.getCluster_code();
+
+                onSettingDropDownContent(View.VISIBLE);
+
+                MainApp.hh02txt = village.getArea_code();
+                MainApp.enumCode = village.getVillage_code();
+                MainApp.enumStr = village.getVillage_name();
+                Members.txtClusterCode.set(village.getCluster_code());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        bi.chkconfirm.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (bi.chkconfirm.isChecked()) {
+                bi.openForm.setBackgroundColor(getResources().getColor(R.color.green));
+                bi.lllstwarning.setVisibility(View.VISIBLE);
+                MainApp.hh01txt = 1;
+            } else {
+                bi.lllstwarning.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
+    private void onSettingDropDownContent(int visibility) {
+        bi.fldGrpna101.setVisibility(visibility);
+        bi.chkconfirm.setChecked(false);
     }
 
     private void alertPSU() {
@@ -358,6 +404,25 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
                 "Install",
                 "Cancel"
         );
+    }
+
+    private void initializingAreaVariables() {
+        areaName = new ArrayList<String>() {
+            {
+                add("....");
+            }
+        };
+        areaList = new ArrayList<>();
+    }
+
+    private void initializingVillageVariables() {
+        villageName = new ArrayList<String>() {
+            {
+                add("....");
+            }
+        };
+        villageMap = new HashMap<>();
+        bi.spVillage.setEnabled(true);
     }
 
 
@@ -430,34 +495,48 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
 
 
     //Reactive Streams
-    private Observable<List<VillageContract>> getVillages() {
+    private Observable<List<VillageContract>> getAreas() {
         return Observable.create(emitter -> {
-            emitter.onNext(appInfo.getDbHelper().getEnumBlock());
+            emitter.onNext(appInfo.getDbHelper().getEnumBlock(MainApp.DIST_ID));
             emitter.onComplete();
         });
     }
 
 
     //Getting data from db
-    public void gettingVillageData() {
-        villageName = new ArrayList<String>() {
-            {
-                add("....");
-            }
-        };
-        villageMap = new HashMap<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, villageName);
-        bi.spVillage.setAdapter(adapter);
-        getVillages()
+    public void gettingAreaData() {
+        initializingAreaVariables();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, areaName);
+        bi.spArea.setAdapter(adapter);
+        getAreas()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(vcontract -> {
-                    for (VillageContract village : vcontract) {
-                        villageName.add(village.getVillage_name());
-                        villageMap.put(village.getVillage_name(), village);
+                .subscribe(new Observer<List<VillageContract>>() {
+                    Disposable disposable;
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
                     }
-                    adapter.notifyDataSetChanged();
-                }, error -> {
+
+                    @Override
+                    public void onNext(List<VillageContract> vContract) {
+                        for (VillageContract village : vContract) {
+                            if (!areaName.contains(village.getArea_code()))
+                                areaName.add(village.getArea_code());
+                            areaList.add(village);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        disposable.dispose();
+                    }
                 });
     }
 

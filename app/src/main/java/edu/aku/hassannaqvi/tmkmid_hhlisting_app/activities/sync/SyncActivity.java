@@ -86,7 +86,7 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
             bi.lbls.setText("DOWNLOADING DATA FROM SERVER");
             /*if (sync_flag) new SyncData(SyncActivity.this, MainApp.DIST_ID).execute(true);
             else new SyncDevice(SyncActivity.this, true).execute();*/
-            new SyncData(SyncActivity.this).execute(sync_flag);
+            new SyncData(SyncActivity.this).execute(true);
         } else {
             Toast.makeText(this, "No network connection available.", Toast.LENGTH_SHORT).show();
         }
@@ -191,42 +191,38 @@ public class SyncActivity extends AppCompatActivity implements SyncDevice.SyncDe
             runOnUiThread(() -> {
                 new SyncDevice(SyncActivity.this, false).execute();
 
-                if (booleans[0]) {
 //                  getting Users!!
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "User", syncListAdapter, list).execute();
+                if (listActivityCreated) {
+                    model = new SyncModel();
+                    model.setstatusID(0);
+                    list.add(model);
+                }
+                new GetAllData(mContext, "User", syncListAdapter, list).execute();
 
 //                    Getting App Version
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "VersionApp", syncListAdapter, list).execute();
+                if (listActivityCreated) {
+                    model = new SyncModel();
+                    model.setstatusID(0);
+                    list.add(model);
+                }
+                new GetAllData(mContext, "VersionApp", syncListAdapter, list).execute();
 
 //                    Getting UCs!!
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "UCs", syncListAdapter, list).execute();
-                    bi.noItem.setVisibility(View.GONE);
-                } else {
+                if (listActivityCreated) {
+                    model = new SyncModel();
+                    model.setstatusID(0);
+                    list.add(model);
+                }
+                new GetAllData(mContext, "UCs", syncListAdapter, list).execute();
 
 //                    Getting Villages
-                    if (listActivityCreated) {
-                        model = new SyncModel();
-                        model.setstatusID(0);
-                        list.add(model);
-                    }
-                    new GetAllData(mContext, "Villages", syncListAdapter, list).execute();
-                    bi.noItem.setVisibility(View.GONE);
+                if (listActivityCreated) {
+                    model = new SyncModel();
+                    model.setstatusID(0);
+                    list.add(model);
                 }
+                new GetAllData(mContext, "Villages", syncListAdapter, list).execute();
+                bi.noItem.setVisibility(View.GONE);
 
                 listActivityCreated = false;
             });
