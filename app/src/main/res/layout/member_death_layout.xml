@@ -97,6 +97,7 @@
                                 style="@style/EditTextNum"
                                 android:hint="@string/hh1902yy"
                                 android:maxLength="4"
+                                app:defaultValue="9998"
                                 app:maxValue="2020"
                                 app:minValue="1920"
                                 app:type="range" />
@@ -119,6 +120,7 @@
                                 style="@style/EditTextNum"
                                 android:hint="@string/hh1902mm"
                                 android:maxLength="2"
+                                app:defaultValue="98"
                                 app:maxValue="12"
                                 app:minValue="1"
                                 app:type="range" />

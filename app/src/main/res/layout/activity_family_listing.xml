@@ -220,7 +220,7 @@
 
                         <TextView
                             style="@style/i_textview"
-                            android:text="@string/hh10" />
+                            android:text="@string/hh11" />
 
                         <com.edittextpicker.aliazaz.EditTextPicker
                             android:id="@+id/hh11"
