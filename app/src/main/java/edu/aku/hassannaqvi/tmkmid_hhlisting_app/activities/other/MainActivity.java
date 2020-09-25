@@ -285,7 +285,7 @@ public class MainActivity extends MenuActivity implements WarningActivityInterfa
     }
 
     public void StartListingBtn(View view) {
-        if (MainApp.PSUExist(MainApp.hh02txt)) {
+        if (MainApp.PSUExist(MainApp.enumCode)) {
             alertPSU();
         } else {
             startActivity(new Intent(this, SetupActivity.class));
