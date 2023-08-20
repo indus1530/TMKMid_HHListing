@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
     def versionPropsFile = file('version.properties')
 
     if (versionPropsFile.canRead()) {
@@ -17,7 +17,7 @@ android {
         defaultConfig {
             applicationId "edu.aku.hassannaqvi.tmkmidve_hhlisting_app"
             minSdkVersion 22
-            targetSdkVersion 30
+            targetSdkVersion 32
             versionCode code
             versionName "1.21"
             testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -44,23 +44,22 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('androidx.test.espresso:espresso-core:3.3.0', {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'com.google.maps.android:android-maps-utils:2.0.3'
-    testImplementation 'junit:junit:4.13'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.media:media:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    testImplementation 'junit:junit:4.13'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
     //BlackBox
     implementation 'com.github.BlackBoxVision:datetimepicker-edittext:v0.4.0'
     //Butter-knife

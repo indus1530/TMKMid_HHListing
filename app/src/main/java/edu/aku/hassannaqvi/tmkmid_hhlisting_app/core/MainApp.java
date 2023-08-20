@@ -1,22 +1,27 @@
 package edu.aku.hassannaqvi.tmkmid_hhlisting_app.core;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.contracts.ListingContract;
@@ -31,12 +36,12 @@ public class MainApp extends Application {
     // GPS Related Field Variables
 //    public static final String _IP = "http://f38158";// .TEST server
     public static final String _IP = "https://vcoe1.aku.edu";// .LIVE server
-    public static final String _HOST_URL = MainApp._IP + "/tmk_el/api/";
+    public static final String _HOST_URL = MainApp._IP + "/tmk_el_2/api/";
     public static final String _SERVER_GET_URL = "getData.php";
     private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
     private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
     private static final int TWO_MINUTES = 1000 * 60 * 2;
-    public static String _UPDATE_URL = MainApp._IP + "/tmk_el/app/listings/";
+    public static String _UPDATE_URL = MainApp._IP + "/tmk_el_2/app/listings/";
     public static String DeviceURL = "devices.php";
     public static AppInfo appInfo;
 
@@ -278,6 +283,35 @@ public class MainApp extends Application {
 
         }
 
+    }
+
+    // Change Locale/Language
+    public static void setLocale(Activity activity, String localeKey) {
+        if (localeKey.equals(getCurrentLocale(activity)))
+            return;
+//        SharedPrefs.write(SharedPrefs.LOCALE, localeKey);
+        Resources resources = activity.getResources();
+        Configuration configuration = resources.getConfiguration();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Locale locale = new Locale(localeKey, "PK");
+        Locale.setDefault(locale);
+        configuration.setLocale(locale);
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+//            activity.createConfigurationContext(configuration);
+//        } else {
+        resources.updateConfiguration(configuration, displayMetrics);
+//        }
+    }
+
+    // Get Current Locale
+    private static String getCurrentLocale(Context context) {
+        Locale locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            locale = context.getResources().getConfiguration().getLocales().get(0);
+        } else {
+            locale = context.getResources().getConfiguration().locale;
+        }
+        return locale.getLanguage();
     }
 
 }

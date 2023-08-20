@@ -1,5 +1,11 @@
 package edu.aku.hassannaqvi.tmkmid_hhlisting_app.activities.other;
 
+import static java.lang.Thread.sleep;
+import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS.LOGIN_SPLASH_FLAG;
+import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.SplashRepositoryKt.populatingSpinners;
+import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt.dbBackup;
+import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt.getPermissionsList;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -74,12 +80,6 @@ import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.DatabaseHelper;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 import kotlin.Unit;
 import kotlin.coroutines.CoroutineContext;
-
-import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.CONSTANTS.LOGIN_SPLASH_FLAG;
-import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.SplashRepositoryKt.populatingSpinners;
-import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt.dbBackup;
-import static edu.aku.hassannaqvi.tmkmid_hhlisting_app.repository.UtilsKt.getPermissionsList;
-import static java.lang.Thread.sleep;
 
 /**
  * A login screen that offers login via email/password.
@@ -234,6 +234,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         } else {
             testing.setVisibility(View.VISIBLE);
         }
+
+        // By default language selection
+        MainApp.setLocale(this, "sd");
 
     }
 
@@ -840,7 +843,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             return;
         }
 //        MainApp.IMEI = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-        MainApp.IMEI = getDeviceId(this);
+//        MainApp.IMEI = getDeviceId(this);
     }
 
 }

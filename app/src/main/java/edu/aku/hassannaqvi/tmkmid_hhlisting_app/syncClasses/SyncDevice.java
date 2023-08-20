@@ -1,5 +1,7 @@
 package edu.aku.hassannaqvi.tmkmid_hhlisting_app.syncClasses;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -23,13 +25,11 @@ import java.nio.charset.StandardCharsets;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.R;
 import edu.aku.hassannaqvi.tmkmid_hhlisting_app.core.MainApp;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class SyncDevice extends AsyncTask<Void, Integer, String> {
-    private SyncDevicInterface delegate;
-    private Context context;
-    private boolean flag;
-    private String TAG = SyncDevice.class.getName();
+    private final SyncDevicInterface delegate;
+    private final Context context;
+    private final boolean flag;
+    private final String TAG = SyncDevice.class.getName();
 
     public SyncDevice(Context context, boolean flag) {
         this.context = context;
@@ -82,7 +82,7 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
 
                 try {
                     jsonObject.addProperty("dist_id", MainApp.DIST_ID);
-                    jsonObject.addProperty("imei", MainApp.IMEI);
+//                    jsonObject.addProperty("imei", MainApp.IMEI);
                     jsonObject.addProperty("appversion", MainApp.versionName + "." + MainApp.versionCode);
                     jsonObject.addProperty("appname", context.getString(R.string.app_name));
 
@@ -102,7 +102,7 @@ public class SyncDevice extends AsyncTask<Void, Integer, String> {
                     sb.append(line).append("\n");
                 }
                 br.close();
-                System.out.println("" + sb.toString());
+                System.out.println("" + sb);
                 return sb.toString();
             } else {
                 System.out.println(connection.getResponseMessage());
